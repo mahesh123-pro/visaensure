@@ -3,11 +3,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, ChevronDown } from "lucide-react";
-import { StudentVisaIllustration, WorkVisaIllustration } from "@/components/Illustrations/TravelIllustrations";
+import Image from "next/image";
+import { StudentVisaIllustration, WorkVisaIllustration, TouristVisaIllustration, PassportIllustration } from "@/components/Illustrations/TravelIllustrations";
 
 const servicesDetails = [
     {
         title: "Student Visa",
+        image: "/images/student-visa.png",
         illustration: StudentVisaIllustration,
         description: "Your gateway to global education. We guide you through university selection, application, and visa filing.",
         benefits: ["University selection assistance", "Scholarship guidance", "Interview preparation", "Post-arrival support"],
@@ -19,6 +21,7 @@ const servicesDetails = [
     },
     {
         title: "Work Visa",
+        image: "/images/work-visa.png",
         illustration: WorkVisaIllustration,
         description: "Launch your international career with our comprehensive work visa and employer-sponsorship support.",
         benefits: ["Employer sponsorship guidance", "Labor certification assistance", "Dependant visa processing", "Permanent residency pathways"],
@@ -26,6 +29,42 @@ const servicesDetails = [
         faqs: [
             { q: "Can my family join me?", a: "Yes, most work visas allow you to bring your spouse and dependent children." },
             { q: "What is an employer sponsor?", a: "An employer sponsor is a company in the destination country that guarantees your employment and supports your visa." }
+        ]
+    },
+    {
+        title: "Tourist Visa",
+        image: "/images/tourist-visa.png",
+        illustration: TouristVisaIllustration,
+        description: "Explore the world with ease. Our tourist visa services cover all major destinations with a focus on speed and reliability.",
+        benefits: ["Itinerary planning", "Hotel booking assistance", "Fast-track processing", "Multi-country visa guidance"],
+        process: ["Destination Selection", "Document Checklist", "Form Submission", "Fee Payment", "Visa Collection"],
+        faqs: [
+            { q: "How early should I apply?", a: "We recommend applying at least 4-6 weeks before your intended travel date." },
+            { q: "Can I extend my tourist visa?", a: "Extension rules vary by country; our consultants can advise on specific local policies." }
+        ]
+    },
+    {
+        title: "Immigration Consultation",
+        image: "/images/immigration.png",
+        illustration: PassportIllustration,
+        description: "Strategic planning for permanent residency and citizenship. Navigate complex immigration laws with expert help.",
+        benefits: ["PR eligibility check", "Legal document preparation", "Spousal and family migration", "Citizen application support"],
+        process: ["Case Analysis", "Strategy Development", "File Preparation", "Submission & Follow-up", "Decision"],
+        faqs: [
+            { q: "What is the difference between PR and Citizenship?", a: "PR allows you to live and work indefinitely, while Citizenship gives you a passport and voting rights." },
+            { q: "Which country is easiest to immigrate to?", a: "Ease of immigration depends on your skills, age, and financial situation. We provide personalized assessments." }
+        ]
+    },
+    {
+        title: "Documentation Support",
+        image: "/images/documentation.png",
+        illustration: PassportIllustration,
+        description: "Flawless paperwork preparation for all your official needs. We ensure your documents meet all legal standards.",
+        benefits: ["Notarization services", "Certified translations", "Apostille and legalization", "Fast-turnaround processing"],
+        process: ["Document Review", "Service Selection", "Processing", "Quality Check", "Delivery"],
+        faqs: [
+            { q: "Are your translations certified?", a: "Yes, we provide certified translations accepted by embassies and official bodies worldwide." },
+            { q: "Do you handle apostille services?", a: "Yes, we facilitate apostille and document legalization for international use." }
         ]
     }
 ];
@@ -94,43 +133,79 @@ export default function ServicesPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.8 }}
-                            className="grid lg:grid-cols-2 gap-16 relative overflow-hidden glass p-10 rounded-[2.5rem] border border-border/50"
+                            className="bg-card rounded-[2.5rem] border border-border/50 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500"
                         >
-                            {/* Watermark Illustration */}
-                            <div className="absolute top-0 right-0 w-64 h-64 opacity-[0.03] pointer-events-none -translate-y-12 translate-x-12">
-                                <service.illustration />
-                            </div>
+                            <div className="grid lg:grid-cols-2 gap-0">
+                                {/* Image and Quick Stats Section */}
+                                <div className="relative h-[400px] lg:h-full min-h-[500px] overflow-hidden group">
+                                    <Image
+                                        src={service.image}
+                                        alt={service.title}
+                                        fill
+                                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/20 to-transparent lg:hidden" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent hidden lg:block" />
 
-                            <div className="transition-colors relative z-10">
-                                <h2 className="text-4xl font-bold font-heading text-foreground mb-4 transition-colors">{service.title}</h2>
-                                <p className="text-lg text-muted-foreground mb-8 leading-relaxed transition-colors">{service.description}</p>
+                                    {/* Illustration Overlay */}
+                                    <div className="absolute top-8 right-8 w-48 h-48 opacity-[0.15] pointer-events-none group-hover:scale-110 transition-transform duration-700">
+                                        <service.illustration />
+                                    </div>
 
-                                <h3 className="text-2xl font-semibold font-heading text-foreground mb-6 transition-colors">Key Benefits</h3>
-                                <ul className="space-y-4 mb-10">
-                                    {service.benefits.map((benefit, i) => (
-                                        <li key={i} className="flex items-start gap-3">
-                                            <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0" />
-                                            <span className="text-muted-foreground transition-colors">{benefit}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                <h3 className="text-2xl font-semibold font-heading text-foreground mb-6 transition-colors">Process</h3>
-                                <div className="flex flex-col gap-4 transition-colors">
-                                    {service.process.map((step, i) => (
-                                        <div key={i} className="flex items-center gap-4">
-                                            <div className="w-8 h-8 rounded-full bg-card shadow-sm border border-border flex items-center justify-center text-sm font-bold text-foreground transition-colors shrink-0">
-                                                {i + 1}
-                                            </div>
-                                            <span className="text-muted-foreground font-medium transition-colors">{step}</span>
-                                        </div>
-                                    ))}
+                                    {/* Action Buttons Overlay for Mobile */}
+                                    <div className="absolute bottom-8 left-8 right-8 lg:hidden">
+                                        <h2 className="text-4xl font-bold font-heading text-foreground mb-2">{service.title}</h2>
+                                        <p className="text-muted-foreground line-clamp-2">{service.description}</p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="pt-2 transition-colors">
-                                <h3 className="text-2xl font-semibold font-heading text-foreground mb-8 transition-colors">Frequently Asked Questions</h3>
-                                <FAQAccordion customfaqs={service.faqs} />
+                                {/* Content Section */}
+                                <div className="p-8 lg:p-16 flex flex-col justify-center">
+                                    <div className="hidden lg:block mb-8">
+                                        <h2 className="text-5xl font-bold font-heading text-foreground mb-4 transition-colors">{service.title}</h2>
+                                        <p className="text-xl text-muted-foreground leading-relaxed transition-colors">{service.description}</p>
+                                    </div>
+
+                                    <div className="grid md:grid-cols-2 gap-12">
+                                        <div>
+                                            <h3 className="text-xl font-bold font-heading text-foreground mb-6 uppercase tracking-wider flex items-center gap-2">
+                                                <div className="w-2 h-8 bg-primary rounded-full" />
+                                                Key Benefits
+                                            </h3>
+                                            <ul className="space-y-4">
+                                                {service.benefits.map((benefit, i) => (
+                                                    <li key={i} className="flex items-start gap-3">
+                                                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                                                        <span className="text-muted-foreground font-medium text-sm md:text-base">{benefit}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-xl font-bold font-heading text-foreground mb-6 uppercase tracking-wider flex items-center gap-2">
+                                                <div className="w-2 h-8 bg-primary/40 rounded-full" />
+                                                The Process
+                                            </h3>
+                                            <div className="space-y-4">
+                                                {service.process.map((step, i) => (
+                                                    <div key={i} className="flex items-center gap-4 group/step">
+                                                        <div className="w-10 h-10 rounded-xl bg-muted border border-border flex items-center justify-center text-sm font-bold text-foreground group-hover/step:bg-primary group-hover/step:text-white transition-all duration-300 shrink-0">
+                                                            {i + 1}
+                                                        </div>
+                                                        <span className="text-muted-foreground font-medium text-sm md:text-base">{step}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-16 pt-12 border-t border-border">
+                                        <h3 className="text-2xl font-bold font-heading text-foreground mb-8">Service FAQs</h3>
+                                        <FAQAccordion customfaqs={service.faqs} />
+                                    </div>
+                                </div>
                             </div>
                         </motion.div>
                     ))}

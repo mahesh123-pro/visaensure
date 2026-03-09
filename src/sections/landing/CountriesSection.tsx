@@ -7,26 +7,26 @@ import { GlobeIllustration } from "@/components/Illustrations/TravelIllustration
 const countries = [
     {
         name: "USA",
-        image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=1470&auto=format&fit=crop",
+        image: "/images/usa.png",
         color: "from-blue-600 to-red-600"
     },
     {
         name: "Canada",
-        image: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=1474&auto=format&fit=crop",
+        image: "/images/canada.png",
         color: "from-red-500 to-red-800"
     },
     {
         name: "UK",
-        image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1470&auto=format&fit=crop",
+        image: "/images/uk.png",
         color: "from-indigo-800 to-red-700"
     },
     {
         name: "Australia",
-        image: "https://images.unsplash.com/photo-1523482580662-fefe3ed36b1d?q=80&w=1454&auto=format&fit=crop",
+        image: "/images/australia.png",
     },
     {
         name: "Europe",
-        image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=1420&auto=format&fit=crop"
+        image: "/images/europe.png"
     }
 ];
 
