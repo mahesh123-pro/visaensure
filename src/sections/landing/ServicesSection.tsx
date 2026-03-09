@@ -3,36 +3,42 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Briefcase, Plane, Scale, FileText, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { StudentVisaIllustration, WorkVisaIllustration, TouristVisaIllustration, PassportIllustration } from "@/components/Illustrations/TravelIllustrations";
 
 const services = [
     {
         title: "Student Visa",
         description: "Expert guidance for your global education journey. Seamless application processing for top universities worldwide.",
         icon: GraduationCap,
+        illustration: StudentVisaIllustration,
         href: "/services",
     },
     {
         title: "Work Visa",
         description: "Secure your dream job abroad. End-to-end support for professional work permits and employer-sponsored visas.",
         icon: Briefcase,
+        illustration: WorkVisaIllustration,
         href: "/services",
     },
     {
         title: "Tourist Visa",
         description: "Explore the world hassle-free. Quick and reliable tourist visa processing for your next global adventure.",
         icon: Plane,
+        illustration: TouristVisaIllustration,
         href: "/services",
     },
     {
         title: "Immigration Consultation",
         description: "Strategic planning for permanent residency and citizenship. Tailored advice from certified experts.",
         icon: Scale,
+        illustration: PassportIllustration,
         href: "/services",
     },
     {
         title: "Documentation Support",
         description: "Flawless paperwork preparation. From translations to notarizations, we ensure your documents are perfect.",
         icon: FileText,
+        illustration: PassportIllustration,
         href: "/services",
     },
 ];
@@ -76,7 +82,10 @@ export default function ServicesSection() {
                         >
                             <Link href={service.href} className="block group h-full">
                                 <div className="glass p-8 rounded-3xl h-full flex flex-col transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(238,39,32,0.15)] relative overflow-hidden group">
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors" />
+                                    {/* SVG Illustration Watermark */}
+                                    <div className="absolute -top-4 -right-4 w-40 h-40 opacity-[0.05] group-hover:opacity-[0.08] group-hover:scale-110 transition-all duration-700 pointer-events-none z-0">
+                                        <service.illustration />
+                                    </div>
 
                                     <div className="w-14 h-14 rounded-2xl bg-background shadow-sm border border-border flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-500 relative z-10">
                                         <service.icon size={28} className="text-primary transition-colors" />

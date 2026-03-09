@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, ChevronDown } from "lucide-react";
+import { StudentVisaIllustration, WorkVisaIllustration } from "@/components/Illustrations/TravelIllustrations";
 
 const servicesDetails = [
     {
         title: "Student Visa",
+        illustration: StudentVisaIllustration,
         description: "Your gateway to global education. We guide you through university selection, application, and visa filing.",
         benefits: ["University selection assistance", "Scholarship guidance", "Interview preparation", "Post-arrival support"],
         process: ["Initial Consultation", "Documentation Collection", "Application Submission", "Biometrics & Interview", "Visa Issuance"],
@@ -17,6 +19,7 @@ const servicesDetails = [
     },
     {
         title: "Work Visa",
+        illustration: WorkVisaIllustration,
         description: "Launch your international career with our comprehensive work visa and employer-sponsorship support.",
         benefits: ["Employer sponsorship guidance", "Labor certification assistance", "Dependant visa processing", "Permanent residency pathways"],
         process: ["Eligibility Assessment", "Job Offer Verification", "Petition Filing", "Visa Application", "Approval"],
@@ -91,9 +94,14 @@ export default function ServicesPage() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.8 }}
-                            className="grid lg:grid-cols-2 gap-16"
+                            className="grid lg:grid-cols-2 gap-16 relative overflow-hidden glass p-10 rounded-[2.5rem] border border-border/50"
                         >
-                            <div className="transition-colors">
+                            {/* Watermark Illustration */}
+                            <div className="absolute top-0 right-0 w-64 h-64 opacity-[0.03] pointer-events-none -translate-y-12 translate-x-12">
+                                <service.illustration />
+                            </div>
+
+                            <div className="transition-colors relative z-10">
                                 <h2 className="text-4xl font-bold font-heading text-foreground mb-4 transition-colors">{service.title}</h2>
                                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed transition-colors">{service.description}</p>
 

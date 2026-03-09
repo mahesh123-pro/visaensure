@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Plane } from "lucide-react";
 import Logo from "@/components/Logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -35,8 +36,22 @@ export default function Navbar() {
                 }`}
         >
             <div className="max-w-7xl mx-auto flex items-center justify-between">
-                <Link href="/" className="flex items-center group transition-transform hover:scale-105">
+                <Link href="/" className="flex items-center group transition-transform hover:scale-105 gap-2">
                     <Logo />
+                    <motion.div
+                        animate={{
+                            x: [0, 5, 0],
+                            y: [0, -3, 0]
+                        }}
+                        transition={{
+                            duration: 4,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        className="text-primary hidden lg:block"
+                    >
+                        <Plane size={18} className="rotate-[15deg]" />
+                    </motion.div>
                 </Link>
 
                 <nav className="hidden md:flex items-center gap-8">
@@ -56,10 +71,10 @@ export default function Navbar() {
                     <ThemeToggle />
                     <Link
                         href="/contact"
-                        className="hidden sm:inline-flex relative z-10 items-center justify-center overflow-hidden rounded-full p-0.5 font-medium shadow-none outline-none group"
+                        className="hidden sm:inline-flex relative items-center justify-center px-8 py-3 overflow-hidden font-bold rounded-full group bg-primary text-white shadow-[0_5px_15px_rgba(238,39,32,0.2)] transition-all hover:shadow-[0_8px_25px_rgba(238,39,32,0.3)] hover:scale-105 active:scale-95"
                     >
-                        <span className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-70 transition-opacity group-hover:opacity-100 animate-pulse" />
-                        <span className="relative flex items-center justify-center gap-2 rounded-full bg-background px-6 py-2.5 transition-all text-sm group-hover:bg-opacity-0 group-hover:text-white">
+                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                        <span className="relative flex items-center gap-2">
                             Apply Now
                         </span>
                     </Link>

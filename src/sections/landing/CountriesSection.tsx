@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { GlobeIllustration } from "@/components/Illustrations/TravelIllustrations";
 
 const countries = [
     {
@@ -32,6 +33,11 @@ const countries = [
 export default function CountriesSection() {
     return (
         <section className="py-24 relative bg-background overflow-hidden transition-colors" id="countries">
+            {/* Background Illustration */}
+            <div className="absolute -top-20 -right-20 w-[600px] h-[600px] opacity-[0.03] pointer-events-none">
+                <GlobeIllustration />
+            </div>
+
             <div className="absolute top-0 right-[-20%] w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-soft-light pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">

@@ -9,9 +9,16 @@ const milestones = [
     { year: "2024", title: "Industry Leaders", description: "Recognized as the top immigration consultancy with a 99% success rate." },
 ];
 
+import { PassportIllustration } from "@/components/Illustrations/TravelIllustrations";
+
 export default function AboutPage() {
     return (
-        <div className="pt-32 pb-24 bg-background min-h-screen">
+        <div className="pt-32 pb-24 bg-background min-h-screen relative overflow-hidden">
+            {/* Background Illustration */}
+            <div className="absolute top-40 right-10 w-96 h-96 opacity-[0.03] pointer-events-none -rotate-12">
+                <PassportIllustration />
+            </div>
+
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

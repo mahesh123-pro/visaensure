@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { StepIllustration, TouristVisaIllustration } from "@/components/Illustrations/TravelIllustrations";
 
 const processSteps = [
     {
@@ -28,6 +29,10 @@ const processSteps = [
 export default function ProcessSection() {
     return (
         <section className="py-24 relative bg-background overflow-hidden" id="process">
+            {/* Background Illustration */}
+            <div className="absolute -bottom-20 -right-20 w-[600px] h-[600px] opacity-[0.02] pointer-events-none rotate-45">
+                <TouristVisaIllustration />
+            </div>
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
                 <div className="text-center max-w-2xl mx-auto mb-20">
                     <motion.div
@@ -73,6 +78,9 @@ export default function ProcessSection() {
                                 className="relative flex flex-col items-center text-center group"
                             >
                                 <div className="w-[124px] h-[124px] rounded-full glass border border-border flex items-center justify-center mb-8 relative group-hover:border-secondary transition-colors duration-500 overflow-hidden shadow-glass">
+                                    <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity">
+                                        <StepIllustration />
+                                    </div>
                                     <div className="absolute inset-0 bg-primary/10 scale-0 origin-center rounded-full group-hover:scale-100 transition-transform duration-500" />
                                     <span className="text-4xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary relative z-10 transition-colors">
                                         {step.number}

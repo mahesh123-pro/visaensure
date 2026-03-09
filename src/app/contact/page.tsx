@@ -2,10 +2,16 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone, Send } from "lucide-react";
+import { ContactIllustration } from "@/components/Illustrations/TravelIllustrations";
 
 export default function ContactPage() {
     return (
-        <div className="pt-32 pb-24 bg-background min-h-screen">
+        <div className="pt-32 pb-24 bg-background min-h-screen relative overflow-hidden">
+            {/* Background Illustration */}
+            <div className="absolute -bottom-20 -left-20 w-80 h-80 opacity-[0.05] pointer-events-none rotate-12">
+                <ContactIllustration />
+            </div>
+
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}

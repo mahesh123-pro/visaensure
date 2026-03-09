@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import { PassportIllustration } from "@/components/Illustrations/TravelIllustrations";
 
 function AnimatedCounter({ value, duration = 2 }: { value: number; duration?: number }) {
     const [count, setCount] = useState(0);
@@ -39,7 +40,12 @@ const trustItems = [
 
 export default function TrustSection() {
     return (
-        <section className="py-20 relative bg-background">
+        <section className="py-20 relative bg-background overflow-hidden">
+            {/* Background Illustration */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-[0.02] pointer-events-none">
+                <PassportIllustration />
+            </div>
+
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
             <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 

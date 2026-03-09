@@ -104,10 +104,31 @@
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #EE2720 0%, #FF6B6B 100%);
+  background: linear-gradient(to right, #EE2720, #FF6B6B, #EE2720);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-text {
+  background: linear-gradient(to right,
+      var(--muted-foreground) 20%,
+      var(--foreground) 40%,
+      var(--foreground) 60%,
+      var(--muted-foreground) 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shine 5s linear infinite;
 }
 
 .shadow-glass {
