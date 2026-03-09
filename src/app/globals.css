@@ -1,93 +1,168 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer base {
+  :root {
+    --background: #FDF1ED;
+    --foreground: #232323;
+    --card: #FFFFFF;
+    --card-foreground: #232323;
+    --popover: #FFFFFF;
+    --popover-foreground: #232323;
+    --primary: #EE2720;
+    --primary-foreground: #FFFFFF;
+    --secondary: #1E1E1E;
+    --secondary-foreground: #FFFFFF;
+    --muted: rgba(0, 0, 0, 0.05);
+    --muted-foreground: rgba(0, 0, 0, 0.6);
+    --accent: rgba(238, 39, 32, 0.1);
+    --accent-foreground: #EE2720;
+    --destructive: #EF4444;
+    --border: rgba(0, 0, 0, 0.08);
+    --input: rgba(0, 0, 0, 0.05);
+    --ring: rgba(238, 39, 32, 0.4);
+    --radius: 1.25rem;
+    --font-heading: "Clash Display", -apple-system, sans-serif;
+  }
+
+  .dark {
+    --background: #0F0F1A;
+    --foreground: #F8F8F8;
+    --card: #1C1C2E;
+    --card-foreground: #F8F8F8;
+    --popover: #1C1C2E;
+    --popover-foreground: #F8F8F8;
+    --primary: #EE2720;
+    --primary-foreground: #FFFFFF;
+    --secondary: #A78BFA;
+    --secondary-foreground: #000000;
+    --muted: rgba(255, 255, 255, 0.1);
+    --muted-foreground: rgba(255, 255, 255, 0.6);
+    --accent: rgba(238, 39, 32, 0.15);
+    --accent-foreground: #FFFFFF;
+    --border: rgba(255, 255, 255, 0.08);
+    --input: rgba(255, 255, 255, 0.05);
+    --ring: rgba(238, 39, 32, 0.5);
   }
 }
 
 @layer base {
-  :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.58 0.22 27);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.809 0.105 251.813);
-    --chart-2: oklch(0.623 0.214 259.815);
-    --chart-3: oklch(0.546 0.245 262.881);
-    --chart-4: oklch(0.488 0.243 264.376);
-    --chart-5: oklch(0.424 0.199 265.638);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
-  }
-  .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.87 0.00 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.371 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.809 0.105 251.813);
-    --chart-2: oklch(0.623 0.214 259.815);
-    --chart-3: oklch(0.546 0.245 262.881);
-    --chart-4: oklch(0.488 0.243 264.376);
-    --chart-5: oklch(0.424 0.199 265.638);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
-  }
-  .theme {
-    --font-sans: var(--font-sans);
-  }
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body transition-colors duration-300;
+    background-color: var(--background);
+    background-image: radial-gradient(rgba(238, 39, 32, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-attachment: fixed;
   }
-  html {
-    @apply font-sans;
+
+  .dark body {
+    background-image: radial-gradient(rgba(238, 39, 32, 0.08) 1px, transparent 1px);
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-tight;
+    letter-spacing: -0.03em;
+  }
+}
+
+/* Premium UI Utilities */
+.glass {
+  @apply transition-all duration-300;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(238, 39, 32, 0.03);
+}
+
+.dark .glass {
+  background: rgba(28, 28, 46, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.glow {
+  box-shadow: 0 0 30px rgba(238, 39, 32, 0.12);
+}
+
+.dark .glow {
+  box-shadow: 0 0 30px rgba(238, 39, 32, 0.2);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #EE2720 0%, #FF6B6B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shadow-glass {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+}
+
+.dark .shadow-glass {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(var(--foreground), 0.2);
+  color: transparent;
+}
+
+.dark .text-stroke {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Scrollbar for Premium Feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(238, 39, 32, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(238, 39, 32, 0.4);
+}
+
+/* Lenis Smooth Scroll Recommended Constraints */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
