@@ -115,12 +115,12 @@ export default function ServicesSection() {
                                                 src={service.image}
                                                 alt={service.title}
                                                 fill
-                                                className="object-cover object-center"
+                                                className="object-cover object-center dark:brightness-125 dark:contrast-110"
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             />
                                         </motion.div>
 
-                                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent dark:from-background/80 dark:via-background/10" />
 
                                         {/* Floating Icon Overlay */}
                                         <motion.div
@@ -169,7 +169,7 @@ export default function ServicesSection() {
 
                                         <div className="mt-8 flex items-center justify-between">
                                             <motion.span
-                                                className="text-xs font-bold tracking-[0.2em] uppercase text-primary opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-500"
+                                                className="text-xs font-bold tracking-[0.2em] uppercase text-primary dark:text-red-400 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-500"
                                             >
                                                 Discover Path
                                             </motion.span>

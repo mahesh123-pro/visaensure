@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { GlobeIllustration } from "@/components/Illustrations/TravelIllustrations";
+import ScrollHero from "@/components/animations/ScrollHero";
 
 const countries = [
     {
@@ -32,35 +33,21 @@ const countries = [
 
 export default function CountriesSection() {
     return (
-        <section className="py-24 relative bg-background overflow-hidden transition-colors" id="countries">
+        <section className="pt-12 pb-24 relative bg-background overflow-hidden transition-colors" id="countries">
             {/* Background Illustration */}
-            <div className="absolute -top-20 -right-20 w-[600px] h-[600px] opacity-[0.03] pointer-events-none">
+            <div className="absolute -top-10 -right-20 w-[600px] h-[600px] opacity-[0.03] pointer-events-none">
                 <GlobeIllustration />
             </div>
 
             <div className="absolute top-0 right-[-20%] w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-soft-light pointer-events-none" />
 
+            {/* Premium Scroll Typograpy Animation */}
+            <div className="w-full">
+                <ScrollHero title="EXPLORE TOP DESTINATIONS" />
+            </div>
+
             <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-                    <div className="max-w-2xl">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card shadow-sm border border-border mb-6 transition-colors"
-                        >
-                            <span className="text-xs font-medium text-primary uppercase tracking-wider">Destinations</span>
-                        </motion.div>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="text-4xl md:text-5xl font-bold font-heading tracking-tight text-foreground mb-4 transition-colors"
-                        >
-                            Explore Top <span className="text-gradient">Destinations</span>
-                        </motion.h2>
-                    </div>
+                <div className="flex flex-col md:flex-row md:items-end justify-end gap-8 mb-6 mt-0">
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -82,17 +69,17 @@ export default function CountriesSection() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true, margin: "-50px" }}
                             transition={{ duration: 0.6, delay: index * 0.1 }}
-                            className={`group relative rounded-3xl overflow-hidden shadow-glass border border-border cursor-pointer transition-colors ${index === 0 ? "md:col-span-2 lg:col-span-2" : index === 3 ? "lg:col-span-2" : ""
+                            className={`group relative rounded-3xl overflow-hidden shadow-glass border border-border dark:border-white/10 cursor-pointer transition-colors ${index === 0 ? "md:col-span-2 lg:col-span-2" : index === 3 ? "lg:col-span-2" : ""
                                 }`}
                         >
                             {/* Background Image */}
                             <div
-                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 dark:brightness-[1.15] dark:contrast-110"
                                 style={{ backgroundImage: `url(${country.image})` }}
                             />
 
                             {/* Gradient overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500 group-hover:opacity-80 dark:from-black/75 dark:via-black/20" />
 
                             {/* Content */}
                             <div className="absolute inset-0 p-8 flex flex-col justify-end">

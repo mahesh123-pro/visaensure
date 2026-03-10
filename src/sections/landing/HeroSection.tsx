@@ -153,7 +153,7 @@ export default function HeroSection() {
                         <Magnetic>
                             <Link
                                 href="/services"
-                                className="inline-flex items-center gap-3 px-10 py-5 bg-white text-foreground border border-border rounded-2xl font-bold transition-all shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:bg-muted"
+                                className="inline-flex items-center gap-3 px-10 py-5 bg-white text-slate-900 border border-border rounded-2xl font-bold transition-all shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:bg-gray-50 dark:bg-card dark:text-white dark:hover:bg-card/80 dark:border-white/10"
                             >
                                 <Globe size={20} className="text-primary" />
                                 Check Eligibility
