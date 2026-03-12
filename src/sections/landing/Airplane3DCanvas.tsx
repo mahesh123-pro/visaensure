@@ -1,136 +1,67 @@
 import { useRef, Suspense, useEffect, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, PerspectiveCamera, ContactShadows, Stars } from "@react-three/drei";
+import { Environment, Float, PerspectiveCamera, ContactShadows, Stars, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { MotionValue } from "framer-motion";
 
-// Super Premium Cinematic Jet
-function SuperJet({ color = "#ffffff", scale = 1, ...props }: any) {
+// Preload the realistic model
+useGLTF.preload("/models/airplane.glb");
+
+// Realistic Airplane Model Component
+function RealisticPlane({ scale = 1, ...props }: any) {
+  const { scene } = useGLTF("/models/airplane.glb");
+  const clone = useMemo(() => scene.clone(), [scene]);
   const groupRef = useRef<THREE.Group>(null);
-  
-  // High-end Materials
-  const bodyMaterial = useMemo(() => new THREE.MeshPhysicalMaterial({
-    color: color,
-    metalness: 1,
-    roughness: 0.1,
-    envMapIntensity: 2,
-    clearcoat: 1,
-    clearcoatRoughness: 0.05,
-    reflectivity: 1
-  }), [color]);
 
-  const engineMaterial = useMemo(() => new THREE.MeshStandardMaterial({
-    color: "#222",
-    metalness: 0.9,
-    roughness: 0.3
-  }), []);
+  useEffect(() => {
+    clone.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh;
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        
+        // Enhance materials for premium look if they exist
+        if (mesh.material) {
+          const mat = mesh.material as THREE.MeshStandardMaterial;
+          if (mat.name.toLowerCase().includes("glass")) {
+            mat.transparent = true;
+            mat.opacity = 0.5;
+            mat.metalness = 1;
+          }
+        }
+      }
+    });
+  }, [clone]);
 
-  const glassMaterial = useMemo(() => new THREE.MeshPhysicalMaterial({
-    color: "#111",
-    metalness: 1,
-    roughness: 0,
-    transparent: true,
-    opacity: 0.4,
-    transmission: 0.9,
-    thickness: 0.5
-  }), []);
+  useFrame((state) => {
+    if (groupRef.current) {
+      const time = state.clock.getElapsedTime();
+      
+      // Dynamic banking animation
+      groupRef.current.rotation.z = Math.sin(time * 0.5) * 0.1;
+      groupRef.current.rotation.x = Math.cos(time * 0.3) * 0.05;
+      
+      // Slight vertical oscillation
+      groupRef.current.position.y += Math.sin(time * 0.7) * 0.002;
+
+      // Animate propellers if they exist
+      groupRef.current.traverse((child) => {
+        if (child.name.toLowerCase().includes("propeller") || child.name.toLowerCase().includes("blade")) {
+          child.rotation.y += 0.4;
+        }
+      });
+    }
+  });
 
   return (
     <group ref={groupRef} scale={scale} {...props}>
-      {/* Main Fuselage */}
-      <mesh rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.6, 0.4, 7, 64]} />
-        <primitive object={bodyMaterial} attach="material" />
-      </mesh>
-
-      {/* Sleek Nose */}
-      <mesh position={[3.5, 0, 0]} rotation={[0, 0, -Math.PI / 2]}>
-        <coneGeometry args={[0.6, 1.5, 64]} />
-        <primitive object={bodyMaterial} attach="material" />
-      </mesh>
-
-      {/* Designer Wings - Swept Back with Winglets */}
-      <group position={[0.5, 0, 0]}>
-        {/* Left Wing */}
-        <mesh position={[0, 0, 5]} rotation={[0.4, -0.2, 0]}>
-          <boxGeometry args={[1.5, 0.08, 10]} />
-          <primitive object={bodyMaterial} attach="material" />
-        </mesh>
-        {/* Right Wing */}
-        <mesh position={[0, 0, -5]} rotation={[-0.4, -0.2, 0]}>
-          <boxGeometry args={[1.5, 0.08, 10]} />
-          <primitive object={bodyMaterial} attach="material" />
-        </mesh>
-        
-        {/* Navigation Lights */}
-        <mesh position={[-0.2, 0.1, 9.8]}>
-          <sphereGeometry args={[0.1, 16, 16]} />
-          <meshBasicMaterial color="#00ff00" />
-        </mesh>
-        <mesh position={[-0.2, 0.1, -9.8]}>
-          <sphereGeometry args={[0.1, 16, 16]} />
-          <meshBasicMaterial color="#ff0000" />
-        </mesh>
-      </group>
-
-      {/* Tail Assembly */}
-      <group position={[-3, 0, 0]}>
-        {/* Vertical Fin */}
-        <mesh position={[0, 1.2, 0]} rotation={[0, 0, -0.5]}>
-          <boxGeometry args={[1.5, 2.5, 0.1]} />
-          <primitive object={bodyMaterial} attach="material" />
-        </mesh>
-        {/* Horizontal Fins */}
-        <mesh position={[0, 0.2, 0]}>
-          <boxGeometry args={[1.2, 0.06, 3.5]} />
-          <primitive object={bodyMaterial} attach="material" />
-        </mesh>
-      </group>
-
-      {/* High-Performance Engines */}
-      <group position={[-1, -0.5, 2.5]}>
-        <mesh rotation={[0, 0, Math.PI / 2]}>
-          <cylinderGeometry args={[0.4, 0.4, 1.5, 32]} />
-          <primitive object={engineMaterial} attach="material" />
-        </mesh>
-        <mesh position={[0.7, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <torusGeometry args={[0.35, 0.05, 16, 32]} />
-          <meshStandardMaterial color="#444" metalness={1} />
-        </mesh>
-        {/* Engine Glow */}
-        <mesh position={[-0.7, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <circleGeometry args={[0.3, 32]} />
-          <meshBasicMaterial color="#4488ff" />
-        </mesh>
-      </group>
-      <group position={[-1, -0.5, -2.5]}>
-        <mesh rotation={[0, 0, Math.PI / 2]}>
-          <cylinderGeometry args={[0.4, 0.4, 1.5, 32]} />
-          <primitive object={engineMaterial} attach="material" />
-        </mesh>
-        <mesh position={[0.7, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <torusGeometry args={[0.35, 0.05, 16, 32]} />
-          <meshStandardMaterial color="#444" metalness={1} />
-        </mesh>
-        {/* Engine Glow */}
-        <mesh position={[-0.7, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <circleGeometry args={[0.3, 32]} />
-          <meshBasicMaterial color="#4488ff" />
-        </mesh>
-      </group>
-
-      {/* Cockpit Canopy */}
-      <mesh position={[2.8, 0.3, 0]} rotation={[0, 0, -0.2]}>
-        <sphereGeometry args={[0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <primitive object={glassMaterial} attach="material" />
-      </mesh>
+      <primitive object={clone} />
     </group>
   );
 }
 
 function ParallaxPlane({ 
   position, 
-  color, 
   scale, 
   rotation, 
   scrollSpeed, 
@@ -138,7 +69,6 @@ function ParallaxPlane({
   scrollProgress 
 }: { 
   position: [number, number, number];
-  color: string;
   scale: number;
   rotation?: [number, number, number];
   scrollSpeed: number;
@@ -169,9 +99,8 @@ function ParallaxPlane({
 
   return (
     <Float speed={floatSpeed * 2} rotationIntensity={0.3} floatIntensity={0.8}>
-      <SuperJet 
+      <RealisticPlane 
         position={position} 
-        color={color} 
         scale={scale} 
         rotation={rotation}
       />
@@ -207,8 +136,7 @@ function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number
       {/* Main Hero Jet - Massive and Foregrounded */}
       <ParallaxPlane 
         position={[8, -2, 10]} 
-        color="#FFFFFF" 
-        scale={3} 
+        scale={0.5} 
         scrollSpeed={0.8}
         floatSpeed={0.5}
         scrollProgress={scrollProgress}
@@ -217,8 +145,7 @@ function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number
       {/* Formation of Parallax Planes - Different depths and speeds */}
       <ParallaxPlane 
         position={[-15, 8, -12]} 
-        color="#fecaca" 
-        scale={1.2} 
+        scale={0.2} 
         rotation={[0.4, 0.5, 0.2]}
         scrollSpeed={1.2}
         floatSpeed={0.8}
@@ -227,8 +154,7 @@ function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number
       
       <ParallaxPlane 
         position={[20, -10, -18]} 
-        color="#FFFFFF" 
-        scale={0.8} 
+        scale={0.15} 
         rotation={[-0.2, -0.6, -0.3]}
         scrollSpeed={-0.6}
         floatSpeed={0.6}
@@ -238,8 +164,7 @@ function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number
       {/* Additional Parallax Planes for Enhanced Effect */}
       <ParallaxPlane 
         position={[-25, 15, 5]} 
-        color="#bfdbfe" 
-        scale={1.5} 
+        scale={0.25} 
         rotation={[0.3, -0.4, 0.1]}
         scrollSpeed={1.5}
         floatSpeed={0.7}
@@ -248,8 +173,7 @@ function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number
 
       <ParallaxPlane 
         position={[30, 5, -8]} 
-        color="#e0e7ff" 
-        scale={1.0} 
+        scale={0.2} 
         rotation={[-0.5, 0.3, -0.2]}
         scrollSpeed={-1.0}
         floatSpeed={0.9}
@@ -258,8 +182,7 @@ function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number
 
       <ParallaxPlane 
         position={[-8, 20, -25]} 
-        color="#fce7f3" 
-        scale={0.6} 
+        scale={0.1} 
         rotation={[0.6, 0.2, 0.3]}
         scrollSpeed={2.0}
         floatSpeed={1.2}
@@ -268,8 +191,7 @@ function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number
 
       <ParallaxPlane 
         position={[15, -15, 15]} 
-        color="#ddd6fe" 
-        scale={1.3} 
+        scale={0.22} 
         rotation={[-0.3, -0.5, 0.4]}
         scrollSpeed={0.4}
         floatSpeed={0.4}
@@ -291,7 +213,6 @@ export default function Airplane3DCanvas({ scrollProgress }: { scrollProgress?: 
       gl={{ 
         antialias: true,
         toneMapping: THREE.ACESFilmicToneMapping,
-        exposure: 1.5
       }}
     >
       <PerspectiveCamera makeDefault position={[0, 0, 28]} fov={42} />
