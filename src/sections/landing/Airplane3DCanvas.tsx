@@ -1,5 +1,5 @@
 import { useRef, Suspense, useEffect, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, GroupProps } from "@react-three/fiber";
 import { Environment, Float, PerspectiveCamera, ContactShadows, Stars, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { MotionValue } from "framer-motion";
@@ -8,7 +8,7 @@ import { MotionValue } from "framer-motion";
 useGLTF.preload("/models/airplane.glb");
 
 // Realistic Airplane Model Component
-function RealisticPlane({ scale = 1, ...props }: any) {
+function RealisticPlane({ scale = 1, ...props }: GroupProps) {
   const { scene } = useGLTF("/models/airplane.glb");
   const clone = useMemo(() => scene.clone(), [scene]);
   const groupRef = useRef<THREE.Group>(null);

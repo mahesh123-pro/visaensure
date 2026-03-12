@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Suspense, useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll } from "framer-motion";
 
 // Dynamically import the 3D components with SSR disabled
