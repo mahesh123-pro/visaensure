@@ -7,6 +7,7 @@ import ProcessSection from "@/sections/landing/ProcessSection";
 import CountriesSection from "@/sections/landing/CountriesSection";
 import TestimonialsSection from "@/sections/landing/TestimonialsSection";
 import CTASection from "@/sections/landing/CTASection";
+import ParallaxSection from "@/sections/landing/ParallaxSection";
 import Preloader from "@/components/animations/Preloader";
 import { motion, useScroll, useSpring } from "framer-motion";
 
@@ -38,6 +39,7 @@ export default function Home() {
         <TrustSection />
         <ServicesSection />
         <ProcessSection />
+        <ParallaxSection />
         <CountriesSection />
         <TestimonialsSection />
         <CTASection />
