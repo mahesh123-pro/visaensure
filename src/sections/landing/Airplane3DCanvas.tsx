@@ -1,80 +1,127 @@
 "use client";
 
-import { useRef, Suspense } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { Environment, Float, Preload } from "@react-three/drei";
+import { useRef, Suspense, useEffect } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Environment, Float, Preload, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 
-function AirplaneModels() {
+// A truly 3D stylized airplane built with Three.js primitives
+function StylizedAirplane({ color = "#ffffff", scale = 1, ...props }) {
   const groupRef = useRef<THREE.Group>(null);
   
-  // Use a simpler approach for texture loading to avoid potential SSR/version issues with multi-load
-  const texture1 = useLoader(THREE.TextureLoader, "/images/airplane1.png");
-  const texture2 = useLoader(THREE.TextureLoader, "/images/airplane2.png");
-
-  useFrame((state) => {
-    if (groupRef.current) {
-       const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
-       // Animation based on scroll
-       groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, -scrollY * 0.005 + 5, 0.1);
-       groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, scrollY * 0.0002, 0.1);
-    }
-  });
-
   return (
-    <group ref={groupRef}>
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-        <mesh position={[-3.5, 2, 0]} rotation={[0, 0.3, 0]}>
-          <planeGeometry args={[6, 4]} />
-          <meshStandardMaterial 
-            map={texture2} 
-            transparent 
-            roughness={0.2} 
-            metalness={0.5} 
-            side={THREE.DoubleSide} 
-            alphaTest={0.05}
-          />
-        </mesh>
-      </Float>
+    <group ref={groupRef} scale={scale} {...props}>
+      {/* Fuselage (Body) */}
+      <mesh rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.5, 0.4, 6, 32]} />
+        <meshStandardMaterial color={color} roughness={0.3} metalness={0.8} />
+      </mesh>
 
-      <Float speed={1.5} rotationIntensity={1} floatIntensity={2}>
-        <mesh position={[4, -1, -3]} rotation={[0, -0.4, 0]}>
-          <planeGeometry args={[7, 4.5]} />
-          <meshStandardMaterial 
-            map={texture1} 
-            transparent 
-            roughness={0.4} 
-            metalness={0.3} 
-            side={THREE.DoubleSide} 
-            alphaTest={0.05}
-          />
-        </mesh>
-      </Float>
+      {/* Nose (Front) */}
+      <mesh position={[3, 0, 0]} rotation={[0, 0, -Math.PI / 2]}>
+        <sphereGeometry args={[0.5, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
+        <meshStandardMaterial color={color} roughness={0.3} metalness={0.8} />
+      </mesh>
 
-      {/* Dark background plane for depth */}
-      <mesh position={[0, 0, -10]}>
-        <planeGeometry args={[50, 50]} />
-        <meshStandardMaterial color="#0c0c0e" />
+      {/* Tail Fin (Vertical) */}
+      <mesh position={[-2.5, 0.8, 0]} rotation={[0, 0, 0.4]}>
+        <boxGeometry args={[1, 1.5, 0.1]} />
+        <meshStandardMaterial color={color} roughness={0.3} metalness={0.8} />
+      </mesh>
+
+      {/* Tail Wings (Horizontal) */}
+      <mesh position={[-2.5, 0.2, 0]}>
+        <boxGeometry args={[0.8, 0.1, 2.5]} />
+        <meshStandardMaterial color={color} roughness={0.3} metalness={0.8} />
+      </mesh>
+
+      {/* Main Wings */}
+      <mesh position={[0.5, 0, 0]}>
+        <boxGeometry args={[1.5, 0.15, 8]} />
+        <meshStandardMaterial color={color} roughness={0.3} metalness={0.8} />
+      </mesh>
+
+      {/* Engines */}
+      <mesh position={[0.5, -0.4, 2]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.25, 0.25, 1, 16]} />
+        <meshStandardMaterial color="#333" roughness={0.5} metalness={0.8} />
+      </mesh>
+      <mesh position={[0.5, -0.4, -2]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.25, 0.25, 1, 16]} />
+        <meshStandardMaterial color="#333" roughness={0.5} metalness={0.8} />
+      </mesh>
+
+      {/* Cockpit Window */}
+      <mesh position={[2.5, 0.25, 0]}>
+        <boxGeometry args={[0.5, 0.2, 0.6]} />
+        <meshStandardMaterial color="#111" roughness={0.1} metalness={1} transparent opacity={0.8} />
       </mesh>
     </group>
   );
 }
 
-export default function Airplane3DCanvas() {
+function AirplaneScene() {
+  const sceneRef = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (sceneRef.current) {
+      const time = state.clock.getElapsedTime();
+      const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+      
+      // Constant movement
+      sceneRef.current.position.y = Math.sin(time * 0.5) * 0.5;
+      
+      // Scroll-based rotation - truly 3D rotation
+      sceneRef.current.rotation.y = THREE.MathUtils.lerp(sceneRef.current.rotation.y, (scrollY * 0.001) + Math.PI / 4, 0.1);
+      sceneRef.current.rotation.z = THREE.MathUtils.lerp(sceneRef.current.rotation.z, Math.sin(time * 0.3) * 0.1, 0.1);
+      sceneRef.current.rotation.x = THREE.MathUtils.lerp(sceneRef.current.rotation.x, (scrollY * 0.0002), 0.1);
+    }
+  });
+
   return (
-    <Canvas 
-      camera={{ position: [0, 0, 12], fov: 45 }} 
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: true }}
-    >
-      <ambientLight intensity={1} />
+    <group ref={sceneRef}>
+      {/* Primary Plane */}
+      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+        <StylizedAirplane position={[0, 0, 0]} color="#ffffff" scale={1.2} />
+      </Float>
+
+      {/* Distance Plane - Private Jet Style */}
+      <Float speed={1.5} rotationIntensity={1} floatIntensity={2}>
+        <StylizedAirplane position={[8, 3, -10]} color="#fecaca" scale={0.6} rotation={[0, Math.PI / 6, 0.2]} />
+      </Float>
+
+      {/* Another distant plane */}
+      <Float speed={1} rotationIntensity={0.5} floatIntensity={1}>
+        <StylizedAirplane position={[-10, -4, -15]} color="#ffffff" scale={0.4} rotation={[0, -Math.PI / 4, -0.1]} />
+      </Float>
+    </group>
+  );
+}
+
+export default function Airplane3DCanvas() {
+  useEffect(() => {
+    console.log("3D Stylized Airplane Canvas Mounted");
+  }, []);
+
+  return (
+    <Canvas shadows dpr={[1, 2]}>
+      <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={40} />
+      
+      {/* Lighting for 3D depth */}
+      <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={1.5} color="#EE2720" />
-      <pointLight position={[-10, -10, 5]} intensity={1} color="#A78BFA" />
-      <spotLight position={[0, 20, 10]} angle={0.15} penumbra={1} intensity={2} />
+      <pointLight position={[-10, -10, -5]} intensity={1} color="#A78BFA" />
+      <spotLight 
+        position={[0, 20, 10]} 
+        angle={0.3} 
+        penumbra={1} 
+        intensity={2} 
+        castShadow 
+      />
       
       <Suspense fallback={null}>
-        <AirplaneModels />
-        <Environment preset="night" />
+        <AirplaneScene />
+        <Environment preset="city" />
       </Suspense>
       
       <Preload all />
