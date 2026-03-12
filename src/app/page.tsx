@@ -8,6 +8,7 @@ import CountriesSection from "@/sections/landing/CountriesSection";
 import TestimonialsSection from "@/sections/landing/TestimonialsSection";
 import CTASection from "@/sections/landing/CTASection";
 import ParallaxSection from "@/sections/landing/ParallaxSection";
+import Airplane3DSection from "@/sections/landing/Airplane3DSection";
 import Preloader from "@/components/animations/Preloader";
 import { motion, useScroll, useSpring } from "framer-motion";
 
@@ -41,6 +42,7 @@ export default function Home() {
         <ProcessSection />
         <ParallaxSection />
         <CountriesSection />
+        <Airplane3DSection />
         <TestimonialsSection />
         <CTASection />
       </motion.div>
