@@ -47,33 +47,34 @@ export default function Airplane3DSection() {
     return (
         <section 
             ref={sectionRef}
-            className="relative h-[160vh] w-full bg-slate-950 overflow-hidden flex flex-col items-center justify-start py-40"
+            className="relative h-[200vh] w-full bg-slate-950 overflow-hidden flex flex-col items-center justify-start py-40"
         >
             
             {/* Cinematic Overlay Text Content */}
-            <div className="relative z-10 pointer-events-none flex flex-col items-center justify-center p-8 text-center mt-32 max-w-6xl">
-                <h2 className="text-7xl md:text-[12rem] font-black font-heading tracking-tighter mb-12 drop-shadow-[0_25px_60px_rgba(0,0,0,1)] uppercase">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-primary/50 to-primary/20">
+            <div className="relative z-10 pointer-events-none flex flex-col items-center justify-center p-8 text-center mt-40 max-w-6xl">
+                <h2 className="text-7xl md:text-[14rem] font-black font-heading tracking-tighter mb-12 drop-shadow-[0_35px_80px_rgba(0,0,0,1)] uppercase">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white/80 to-primary/40">
                         Wings of
                     </span>
                     <br />
                     <span className="text-white drop-shadow-2xl">Assurance</span>
                 </h2>
                 
-                <div className="max-w-xl mx-auto backdrop-blur-3xl bg-white/5 p-12 rounded-[4rem] border border-white/10 shadow-3xl relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <p className="text-2xl md:text-3xl text-white/90 font-medium leading-tight relative z-10 tracking-tight">
-                        Experience the next generation of global mobility. Our AI precision meets 3D interaction.
+                <div className="max-w-2xl mx-auto backdrop-blur-3xl bg-white/5 p-12 rounded-[5rem] border border-white/10 shadow-3xl relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    <p className="text-2xl md:text-4xl text-white/90 font-medium leading-tight relative z-10 tracking-tight">
+                        Experience the next generation of global mobility. <br />
+                        <span className="text-primary font-bold">Our AI precision meets 3D interaction.</span>
                     </p>
                 </div>
             </div>
 
-            {/* Canvas for Three.js - Dynamically loaded */}
+            {/* Canvas for Three.js - Now on TOP with z-20 */}
             <motion.div 
-                className="absolute inset-0 z-0"
+                className="absolute inset-0 z-20 pointer-events-none"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: scrollOpacity }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
+                transition={{ duration: 2, ease: "easeOut" }}
             >
                 <Scene3D scrollProgress={scrollYProgress} />
             </motion.div>

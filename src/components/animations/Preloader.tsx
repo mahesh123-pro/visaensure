@@ -75,31 +75,57 @@ export default function Preloader() {
                                     transition={{ duration: 1.2, delay: 0.7, ease: "easeInOut" }}
                                 />
 
-                                {/* Airplane animating along the path */}
+                                {/* Airplane animating in V-shape pattern */}
                                 <motion.g
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ duration: 0.1, delay: 0.5 }}
                                 >
-                                    <g>
-                                        <g transform="rotate(90) translate(-12, -12)">
+                                    <motion.g
+                                        animate={{
+                                            x: [
+                                                -10,    // Start left
+                                                20,     // Move to center-right (first V stroke down)
+                                                50,     // Continue right-down
+                                                75,     // Bottom point of V
+                                                50,     // Move up-left (second V stroke up)
+                                                25,     // Continue up-left
+                                                10      // End near top-left
+                                            ],
+                                            y: [
+                                                65,     // Start top-left
+                                                90,     // Move down-right
+                                                110,    // Continue down
+                                                120,    // Bottom tip of V
+                                                110,    // Move up-right
+                                                85,     // Continue up
+                                                60      // End top-right
+                                            ],
+                                            rotate: [
+                                                45,     // Initial rotation (pointing down-right)
+                                                60,     // Rotating as it goes down
+                                                75,     // Steeper angle
+                                                90,     // Pointing down at V bottom
+                                                105,    // Starting to point up-right
+                                                120,    // More upward
+                                                135     // Final position pointing up-right
+                                            ]
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            delay: 0.5,
+                                            ease: "easeInOut",
+                                            times: [0, 0.15, 0.3, 0.5, 0.7, 0.85, 1]
+                                        }}
+                                    >
+                                        <g transform="translate(-12, -12)">
                                             <path
                                                 d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
                                                 fill="white"
                                                 filter="url(#glow)"
                                             />
                                         </g>
-                                        <animateMotion
-                                            path="M -10 65 Q 40 120 75 35"
-                                            dur="1.2s"
-                                            begin="0.5s"
-                                            fill="freeze"
-                                            rotate="auto"
-                                            calcMode="spline"
-                                            keySplines="0.42 0 0.58 1"
-                                            keyTimes="0;1"
-                                        />
-                                    </g>
+                                    </motion.g>
                                 </motion.g>
                             </svg>
                         </div>

@@ -204,6 +204,52 @@ export default function HeroSection() {
                         <div className="absolute inset-0 border-[12px] border-white/30 rounded-[3rem] pointer-events-none" />
                     </div>
 
+                    {/* 3D Plane Elements with Parallax Effect */}
+                    <motion.div
+                        animate={{ 
+                            y: [0, -20, 0],
+                            x: [0, 10, 0],
+                            rotate: [0, 5, 0]
+                        }}
+                        transition={{ 
+                            duration: 6, 
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        className="absolute top-20 -right-8 z-30 opacity-80"
+                    >
+                        <svg width="120" height="72" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="100" cy="60" rx="80" ry="20" fill="#FFFFFF" opacity="0.9"/>
+                            <path d="M90 60 L140 20 L150 30 L100 70 Z" fill="#FFFFFF" opacity="0.7"/>
+                            <path d="M90 60 L140 100 L150 90 L100 50 Z" fill="#FFFFFF" opacity="0.7"/>
+                            <path d="M20 60 L50 30 L60 40 L30 70 Z" fill="#EE2720" opacity="0.8"/>
+                            <circle cx="170" cy="60" r="8" fill="#4488ff" opacity="0.9"/>
+                        </svg>
+                    </motion.div>
+
+                    <motion.div
+                        animate={{ 
+                            y: [0, 30, 0],
+                            x: [0, -15, 0],
+                            rotate: [0, -8, 0]
+                        }}
+                        transition={{ 
+                            duration: 8, 
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: 1
+                        }}
+                        className="absolute bottom-32 -left-16 z-30 opacity-60"
+                    >
+                        <svg width="80" height="48" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="100" cy="60" rx="80" ry="20" fill="#bfdbfe" opacity="0.8"/>
+                            <path d="M90 60 L140 20 L150 30 L100 70 Z" fill="#bfdbfe" opacity="0.6"/>
+                            <path d="M90 60 L140 100 L150 90 L100 50 Z" fill="#bfdbfe" opacity="0.6"/>
+                            <path d="M20 60 L50 30 L60 40 L30 70 Z" fill="#A78BFA" opacity="0.7"/>
+                            <circle cx="170" cy="60" r="8" fill="#4488ff" opacity="0.9"/>
+                        </svg>
+                    </motion.div>
+
                     {/* Floating Premium Cards */}
                     <div
                         ref={(el) => { floatingCardsRef.current[0] = el; }}

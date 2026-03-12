@@ -4,6 +4,76 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
+// 3D Plane SVG Component for Parallax Effect
+function ParallaxPlaneSVG({ 
+  speed, 
+  size, 
+  initialX, 
+  initialY,
+  color = "#FFFFFF"
+}: { 
+  speed: number;
+  size: number;
+  initialX: string;
+  initialY: string;
+  color?: string;
+}) {
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], [`${initialY}`, `calc(${initialY} + ${speed * 100}px)`]);
+  const x = useTransform(scrollYProgress, [0, 1], [`${initialX}`, `calc(${initialX} + ${Math.sin(speed) * 50}px)`]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, speed * 45]);
+
+  return (
+    <motion.div
+      style={{ y, x, rotate }}
+      className="absolute pointer-events-none z-10 opacity-60 hover:opacity-100 transition-opacity duration-300"
+    >
+      <svg
+        width={size}
+        height={size * 0.6}
+        viewBox="0 0 200 120"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* Airplane Body */}
+        <ellipse
+          cx="100"
+          cy="60"
+          rx="80"
+          ry="20"
+          fill={color}
+          opacity="0.8"
+        />
+        {/* Wings */}
+        <path
+          d="M90 60 L140 20 L150 30 L100 70 Z"
+          fill={color}
+          opacity="0.7"
+        />
+        <path
+          d="M90 60 L140 100 L150 90 L100 50 Z"
+          fill={color}
+          opacity="0.7"
+        />
+        {/* Tail */}
+        <path
+          d="M20 60 L50 30 L60 40 L30 70 Z"
+          fill={color}
+          opacity="0.6"
+        />
+        {/* Engine Glow */}
+        <circle
+          cx="170"
+          cy="60"
+          r="8"
+          fill="#4488ff"
+          opacity="0.9"
+        />
+      </svg>
+    </motion.div>
+  );
+}
+
 export default function ParallaxSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -37,6 +107,45 @@ export default function ParallaxSection() {
                     priority
                 />
             </motion.div>
+
+            {/* 3D Plane Parallax Layer - Multiple planes at different depths */}
+            <div className="absolute inset-0 z-10 overflow-hidden">
+                <ParallaxPlaneSVG 
+                  speed={-1.5} 
+                  size={120} 
+                  initialX="10%" 
+                  initialY="20%"
+                  color="#bfdbfe"
+                />
+                <ParallaxPlaneSVG 
+                  speed={2} 
+                  size={80} 
+                  initialX="80%" 
+                  initialY="60%"
+                  color="#fef3c7"
+                />
+                <ParallaxPlaneSVG 
+                  speed={-0.8} 
+                  size={150} 
+                  initialX="70%" 
+                  initialY="15%"
+                  color="#e0e7ff"
+                />
+                <ParallaxPlaneSVG 
+                  speed={1.2} 
+                  size={100} 
+                  initialX="20%" 
+                  initialY="75%"
+                  color="#fce7f3"
+                />
+                <ParallaxPlaneSVG 
+                  speed={-2.5} 
+                  size={60} 
+                  initialX="85%" 
+                  initialY="40%"
+                  color="#ddd6fe"
+                />
+            </div>
 
             {/* Middle Layer: Text Content */}
             <motion.div
