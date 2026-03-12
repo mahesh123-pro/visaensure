@@ -2,11 +2,12 @@
 
 import { useRef, Suspense, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, Preload, PerspectiveCamera } from "@react-three/drei";
+import { Environment, Float, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
+import { MotionValue } from "framer-motion";
 
 // A truly 3D stylized airplane built with Three.js primitives
-function StylizedAirplane({ color = "#ffffff", scale = 1, ...props }) {
+function StylizedAirplane({ color = "#ffffff", scale = 1, ...props }: any) {
   const groupRef = useRef<THREE.Group>(null);
   
   return (
@@ -60,21 +61,24 @@ function StylizedAirplane({ color = "#ffffff", scale = 1, ...props }) {
   );
 }
 
-function AirplaneScene() {
+function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number> }) {
   const sceneRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
     if (sceneRef.current) {
       const time = state.clock.getElapsedTime();
-      const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+      const progress = scrollProgress ? scrollProgress.get() : 0;
       
-      // Constant movement
+      // Constant movement (floating)
       sceneRef.current.position.y = Math.sin(time * 0.5) * 0.5;
       
-      // Scroll-based rotation - truly 3D rotation
-      sceneRef.current.rotation.y = THREE.MathUtils.lerp(sceneRef.current.rotation.y, (scrollY * 0.001) + Math.PI / 4, 0.1);
-      sceneRef.current.rotation.z = THREE.MathUtils.lerp(sceneRef.current.rotation.z, Math.sin(time * 0.3) * 0.1, 0.1);
-      sceneRef.current.rotation.x = THREE.MathUtils.lerp(sceneRef.current.rotation.x, (scrollY * 0.0002), 0.1);
+      // Controlled 3D rotation based on progress
+      const targetRotationY = Math.PI / 4 + progress * Math.PI;
+      const targetRotationX = progress * 0.5;
+      
+      sceneRef.current.rotation.y = THREE.MathUtils.lerp(sceneRef.current.rotation.y, targetRotationY, 0.05);
+      sceneRef.current.rotation.x = THREE.MathUtils.lerp(sceneRef.current.rotation.x, targetRotationX, 0.05);
+      sceneRef.current.rotation.z = THREE.MathUtils.lerp(sceneRef.current.rotation.z, Math.sin(time * 0.3) * 0.1, 0.05);
     }
   });
 
@@ -82,49 +86,48 @@ function AirplaneScene() {
     <group ref={sceneRef}>
       {/* Primary Plane */}
       <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-        <StylizedAirplane position={[0, 0, 0]} color="#ffffff" scale={1.2} />
+        <StylizedAirplane position={[0, 0, 0]} color="#ffffff" scale={0.8} />
       </Float>
 
       {/* Distance Plane - Private Jet Style */}
       <Float speed={1.5} rotationIntensity={1} floatIntensity={2}>
-        <StylizedAirplane position={[8, 3, -10]} color="#fecaca" scale={0.6} rotation={[0, Math.PI / 6, 0.2]} />
+        <StylizedAirplane position={[12, 5, -15]} color="#fecaca" scale={0.4} rotation={[0, Math.PI / 6, 0.2]} />
       </Float>
 
       {/* Another distant plane */}
       <Float speed={1} rotationIntensity={0.5} floatIntensity={1}>
-        <StylizedAirplane position={[-10, -4, -15]} color="#ffffff" scale={0.4} rotation={[0, -Math.PI / 4, -0.1]} />
+        <StylizedAirplane position={[-15, -6, -20]} color="#ffffff" scale={0.3} rotation={[0, -Math.PI / 4, -0.1]} />
       </Float>
     </group>
   );
 }
 
-export default function Airplane3DCanvas() {
+export default function Airplane3DCanvas({ scrollProgress }: { scrollProgress?: MotionValue<number> }) {
   useEffect(() => {
     console.log("3D Stylized Airplane Canvas Mounted");
   }, []);
 
   return (
     <Canvas shadows dpr={[1, 2]}>
-      <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={40} />
+      <PerspectiveCamera makeDefault position={[0, 0, 25]} fov={35} />
       
       {/* Lighting for 3D depth */}
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} intensity={1.5} color="#EE2720" />
-      <pointLight position={[-10, -10, -5]} intensity={1} color="#A78BFA" />
+      <ambientLight intensity={1.5} />
+      <pointLight position={[20, 20, 20]} intensity={500} color="#EE2720" />
+      <pointLight position={[-20, -20, -10]} intensity={300} color="#A78BFA" />
       <spotLight 
-        position={[0, 20, 10]} 
-        angle={0.3} 
+        position={[0, 40, 20]} 
+        angle={0.4} 
         penumbra={1} 
-        intensity={2} 
+        intensity={500} 
         castShadow 
       />
       
+      <AirplaneScene scrollProgress={scrollProgress} />
+      
       <Suspense fallback={null}>
-        <AirplaneScene />
         <Environment preset="city" />
       </Suspense>
-      
-      <Preload all />
     </Canvas>
   );
 }

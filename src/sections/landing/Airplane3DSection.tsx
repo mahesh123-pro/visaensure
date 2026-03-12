@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { Suspense, useRef, useEffect, useState } from "react";
+import { motion, useScroll } from "framer-motion";
 
 // Dynamically import the 3D components with SSR disabled
 const Scene3D = dynamic(() => import("./Airplane3DCanvas"), {
@@ -18,6 +19,11 @@ const Scene3D = dynamic(() => import("./Airplane3DCanvas"), {
 export default function Airplane3DSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const [scrollOpacity, setScrollOpacity] = useState(0);
+    
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end start"]
+    });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -63,9 +69,14 @@ export default function Airplane3DSection() {
             </div>
 
             {/* Canvas for Three.js - Dynamically loaded */}
-            <div className="absolute inset-0 z-0">
-                <Scene3D />
-            </div>
+            <motion.div 
+                className="absolute inset-0 z-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: scrollOpacity }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+            >
+                <Scene3D scrollProgress={scrollYProgress} />
+            </motion.div>
             
             {/* Edge Overlays to blend with existing content */}
             <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-zinc-950 via-zinc-950/80 to-transparent z-20 pointer-events-none" />
