@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, Suspense } from "react";
 import { motion, useScroll } from "framer-motion";
 
 // Dynamically import the 3D components with SSR disabled
@@ -76,7 +76,9 @@ export default function Airplane3DSection() {
                 animate={{ opacity: scrollOpacity }}
                 transition={{ duration: 2, ease: "easeOut" }}
             >
-                <Scene3D scrollProgress={scrollYProgress} />
+                <Suspense fallback={null}>
+                    <Scene3D scrollProgress={scrollYProgress} />
+                </Suspense>
             </motion.div>
             
             {/* Edge Overlays to blend with existing content */}

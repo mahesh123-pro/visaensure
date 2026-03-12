@@ -11,7 +11,7 @@ useGLTF.preload("/models/airplane.glb");
 function RealisticPlane({ scale = 1, ...props }: GroupProps) {
   const { scene } = useGLTF("/models/airplane.glb");
   const clone = useMemo(() => scene.clone(), [scene]);
-  const groupRef = useRef<THREE.Group>(null);
+  const groupRef = useRef<THREE.Group | null>(null);
 
   useEffect(() => {
     clone.traverse((child) => {
@@ -75,7 +75,7 @@ function ParallaxPlane({
   floatSpeed: number;
   scrollProgress?: MotionValue<number>;
 }) {
-  const meshRef = useRef<THREE.Group>(null);
+  const meshRef = useRef<THREE.Group | null>(null);
   
   useFrame((state) => {
     if (meshRef.current && scrollProgress) {
@@ -109,7 +109,7 @@ function ParallaxPlane({
 }
 
 function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number> }) {
-  const sceneRef = useRef<THREE.Group>(null);
+  const sceneRef = useRef<THREE.Group | null>(null);
 
   useFrame((state) => {
     if (sceneRef.current) {
