@@ -9,7 +9,6 @@ import TestimonialsSection from "@/sections/landing/TestimonialsSection";
 import CTASection from "@/sections/landing/CTASection";
 import ParallaxSection from "@/sections/landing/ParallaxSection";
 import Airplane3DSection from "@/sections/landing/Airplane3DSection";
-import Preloader from "@/components/animations/Preloader";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 export default function Home() {
@@ -22,7 +21,6 @@ export default function Home() {
 
   return (
     <>
-      <Preloader />
       {/* Scroll Progress Indicator */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary via-red-400 to-primary origin-left z-[100]"

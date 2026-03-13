@@ -84,38 +84,38 @@ export default function Preloader() {
                                     <motion.g
                                         animate={{
                                             x: [
-                                                -10,    // Start left
-                                                20,     // Move to center-right (first V stroke down)
-                                                50,     // Continue right-down
-                                                75,     // Bottom point of V
-                                                50,     // Move up-left (second V stroke up)
-                                                25,     // Continue up-left
-                                                10      // End near top-left
+                                                -20,    // Start outside left
+                                                10,     // Enter circle
+                                                35,     // Mid-down
+                                                70,     // Bottom curve
+                                                95,     // Mid-up
+                                                120,    // Leaving circle
+                                                150     // End outside right
                                             ],
                                             y: [
-                                                65,     // Start top-left
-                                                90,     // Move down-right
-                                                110,    // Continue down
-                                                120,    // Bottom tip of V
-                                                110,    // Move up-right
-                                                85,     // Continue up
-                                                60      // End top-right
+                                                55,     // Top
+                                                85,     // Mid
+                                                105,    // Down
+                                                115,    // Bottom
+                                                90,     // Up
+                                                55,     // Higher
+                                                30      // Leaving top-right
                                             ],
                                             rotate: [
-                                                45,     // Initial rotation (pointing down-right)
-                                                60,     // Rotating as it goes down
-                                                75,     // Steeper angle
-                                                90,     // Pointing down at V bottom
-                                                105,    // Starting to point up-right
-                                                120,    // More upward
-                                                135     // Final position pointing up-right
+                                                125,    // Pointing down-right
+                                                115,    // Slightly more forward
+                                                95,     // Approaching horizontal down
+                                                70,     // Banking up
+                                                45,     // Pointing up-right
+                                                30,     // Steeper up
+                                                20      // Final climb
                                             ]
                                         }}
                                         transition={{
-                                            duration: 2,
+                                            duration: 2.2,
                                             delay: 0.5,
                                             ease: "easeInOut",
-                                            times: [0, 0.15, 0.3, 0.5, 0.7, 0.85, 1]
+                                            times: [0, 0.15, 0.35, 0.5, 0.7, 0.85, 1]
                                         }}
                                     >
                                         <g transform="translate(-12, -12)">

@@ -37,13 +37,10 @@ function RealisticPlane({ scale = 1, ...props }: GroupProps) {
     if (groupRef.current) {
       const time = state.clock.getElapsedTime();
       
-      // Dynamic banking animation
+      // Dynamic banking animation - purely rotational
       groupRef.current.rotation.z = Math.sin(time * 0.5) * 0.1;
       groupRef.current.rotation.x = Math.cos(time * 0.3) * 0.05;
       
-      // Slight vertical oscillation
-      groupRef.current.position.y += Math.sin(time * 0.7) * 0.002;
-
       // Animate propellers if they exist
       groupRef.current.traverse((child) => {
         if (child.name.toLowerCase().includes("propeller") || child.name.toLowerCase().includes("blade")) {
@@ -92,42 +89,57 @@ function ParallaxPlane({
       meshRef.current.rotation.y = (rotation?.[1] || 0) + (progress * 0.3);
       meshRef.current.rotation.z = (rotation?.[2] || 0) + Math.sin(time * 0.3) * 0.1;
     } else if (meshRef.current) {
+      // If no scrollProgress, just apply the base position and a simple float
       const time = state.clock.getElapsedTime();
       meshRef.current.position.y = position[1] + Math.sin(time * floatSpeed) * 1.5;
+      meshRef.current.position.x = position[0];
+      meshRef.current.position.z = position[2];
+      meshRef.current.rotation.set(rotation?.[0] || 0, rotation?.[1] || 0, rotation?.[2] || 0);
     }
   });
 
   return (
-    <Float speed={floatSpeed * 2} rotationIntensity={0.3} floatIntensity={0.8}>
-      <RealisticPlane 
-        position={position} 
-        scale={scale} 
-        rotation={rotation}
-      />
-    </Float>
+    <group ref={meshRef} position={position} rotation={rotation}>
+      <Float speed={floatSpeed * 2} rotationIntensity={0.3} floatIntensity={0.8}>
+        <RealisticPlane 
+          scale={scale} 
+        />
+      </Float>
+    </group>
   );
 }
 
 function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number> }) {
   const sceneRef = useRef<THREE.Group | null>(null);
 
+  useEffect(() => {
+    if (sceneRef.current) {
+      // Set initial orientation to prevent tumbling jump on load
+      sceneRef.current.rotation.y = Math.PI / 2.5;
+      sceneRef.current.rotation.x = -0.4;
+    }
+  }, []);
+
   useFrame((state) => {
     if (sceneRef.current) {
       const time = state.clock.getElapsedTime();
       const progress = scrollProgress ? scrollProgress.get() : 0;
       
-      // Floating motion
-      sceneRef.current.position.y = Math.sin(time * 0.5) * 1.2;
-      sceneRef.current.position.x = Math.cos(time * 0.3) * 2;
+      // Floating motion - steady and cinematic
+      sceneRef.current.position.y = Math.sin(time * 0.4) * 1.5;
+      sceneRef.current.position.x = Math.cos(time * 0.2) * 2.5;
+      sceneRef.current.position.z = Math.sin(time * 0.3) * 1;
       
       // Dramatic rotation tied to scroll
-      const targetRotationY = Math.PI / 2.5 + progress * Math.PI * 2;
-      const targetRotationX = progress * 1.2 - 0.4;
-      const targetRotationZ = Math.sin(time * 0.2) * 0.2;
+      // We use a base rotation that faces the plane nicely towards the camera (diagonal)
+      const targetRotationY = Math.PI / 2.5 + progress * Math.PI * 1.8;
+      const targetRotationX = progress * 1.0 - 0.4;
+      const targetRotationZ = Math.sin(time * 0.15) * 0.15;
       
-      sceneRef.current.rotation.y = THREE.MathUtils.lerp(sceneRef.current.rotation.y, targetRotationY, 0.03);
-      sceneRef.current.rotation.x = THREE.MathUtils.lerp(sceneRef.current.rotation.x, targetRotationX, 0.03);
-      sceneRef.current.rotation.z = THREE.MathUtils.lerp(sceneRef.current.rotation.z, targetRotationZ, 0.03);
+      // Smooth lerping for cinematic feel
+      sceneRef.current.rotation.y = THREE.MathUtils.lerp(sceneRef.current.rotation.y, targetRotationY, 0.04);
+      sceneRef.current.rotation.x = THREE.MathUtils.lerp(sceneRef.current.rotation.x, targetRotationX, 0.04);
+      sceneRef.current.rotation.z = THREE.MathUtils.lerp(sceneRef.current.rotation.z, targetRotationZ, 0.04);
     }
   });
 
