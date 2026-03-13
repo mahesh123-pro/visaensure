@@ -39,7 +39,7 @@ export default function Logo({ className = "" }: { className?: string }) {
             {/* VisaEnsure Text */}
             <span className="font-heading font-bold text-2xl tracking-tight hidden sm:block">
                 <span className="text-[#EE2720]">Visa</span>
-                <span className="text-[#232323] dark:text-white">Ensure</span>
+                <span className="text-foreground dark:text-white">Ensure</span>
             </span>
         </div>
     );

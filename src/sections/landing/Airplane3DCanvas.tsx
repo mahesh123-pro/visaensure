@@ -60,9 +60,10 @@ function RealisticPlane({ scale = 1, ...props }: GroupProps) {
 function ParallaxPlane({ 
   position, 
   scale, 
-  rotation, 
+  rotation = [0, 0, 0], 
   scrollSpeed, 
   floatSpeed,
+  flightSpeed = 10,
   scrollProgress 
 }: { 
   position: [number, number, number];
@@ -70,41 +71,53 @@ function ParallaxPlane({
   rotation?: [number, number, number];
   scrollSpeed: number;
   floatSpeed: number;
+  flightSpeed?: number;
   scrollProgress?: MotionValue<number>;
 }) {
-  const meshRef = useRef<THREE.Group | null>(null);
-  
-  useFrame((state) => {
-    if (meshRef.current && scrollProgress) {
-      const time = state.clock.getElapsedTime();
-      const progress = scrollProgress.get();
+  const outerGroup = useRef<THREE.Group>(null);
+  const innerGroup = useRef<THREE.Group>(null);
+  const startVector = useMemo(() => new THREE.Vector3(...position), [position]);
+
+  useFrame((state, delta) => {
+    if (outerGroup.current) {
+      // Fly perfectly straight forward in its local Z direction
+      outerGroup.current.translateZ(flightSpeed * delta);
       
-      // Parallax movement based on scroll
-      meshRef.current.position.y = position[1] + (progress * scrollSpeed * 10);
-      meshRef.current.position.x = position[0] + Math.sin(time * floatSpeed) * 2;
-      meshRef.current.position.z = position[2];
-      
-      // Dynamic rotation with scroll
-      meshRef.current.rotation.x = (rotation?.[0] || 0) + (progress * 0.5);
-      meshRef.current.rotation.y = (rotation?.[1] || 0) + (progress * 0.3);
-      meshRef.current.rotation.z = (rotation?.[2] || 0) + Math.sin(time * 0.3) * 0.1;
-    } else if (meshRef.current) {
-      // If no scrollProgress, just apply the base position and a simple float
+      // Loop the plane back once it travels far enough
+      if (outerGroup.current.position.distanceTo(startVector) > 150) {
+        outerGroup.current.position.copy(startVector);
+      }
+    }
+
+    if (innerGroup.current) {
+      const progress = scrollProgress ? scrollProgress.get() : 0;
       const time = state.clock.getElapsedTime();
-      meshRef.current.position.y = position[1] + Math.sin(time * floatSpeed) * 1.5;
-      meshRef.current.position.x = position[0];
-      meshRef.current.position.z = position[2];
-      meshRef.current.rotation.set(rotation?.[0] || 0, rotation?.[1] || 0, rotation?.[2] || 0);
+      
+      // Parallax elevation and subtle shift
+      innerGroup.current.position.y = (progress * scrollSpeed * 20) + Math.sin(time * floatSpeed) * 1.5;
+      
+      // Dynamic cinematic banking based on scroll, so it looks like it glides gracefully
+      innerGroup.current.rotation.z = THREE.MathUtils.lerp(
+        innerGroup.current.rotation.z, 
+        -(progress * scrollSpeed * 0.8) + Math.sin(time * 0.3) * 0.05, 
+        0.05
+      );
+      // Nice pitch up on scroll
+      innerGroup.current.rotation.x = THREE.MathUtils.lerp(
+        innerGroup.current.rotation.x, 
+        -(progress * 0.5), 
+        0.05
+      );
     }
   });
 
   return (
-    <group ref={meshRef} position={position} rotation={rotation}>
-      <Float speed={floatSpeed * 2} rotationIntensity={0.3} floatIntensity={0.8}>
-        <RealisticPlane 
-          scale={scale} 
-        />
-      </Float>
+    <group ref={outerGroup} position={position} rotation={rotation}>
+      <group ref={innerGroup}>
+        <Float speed={floatSpeed * 2} rotationIntensity={0.1} floatIntensity={0.5}>
+          <RealisticPlane scale={scale} />
+        </Float>
+      </group>
     </group>
   );
 }
@@ -112,101 +125,68 @@ function ParallaxPlane({
 function AirplaneScene({ scrollProgress }: { scrollProgress?: MotionValue<number> }) {
   const sceneRef = useRef<THREE.Group | null>(null);
 
-  useEffect(() => {
-    if (sceneRef.current) {
-      // Set initial orientation to prevent tumbling jump on load
-      sceneRef.current.rotation.y = Math.PI / 2.5;
-      sceneRef.current.rotation.x = -0.4;
-    }
-  }, []);
-
   useFrame((state) => {
     if (sceneRef.current) {
       const time = state.clock.getElapsedTime();
-      const progress = scrollProgress ? scrollProgress.get() : 0;
       
-      // Floating motion - steady and cinematic
-      sceneRef.current.position.y = Math.sin(time * 0.4) * 1.5;
-      sceneRef.current.position.x = Math.cos(time * 0.2) * 2.5;
-      sceneRef.current.position.z = Math.sin(time * 0.3) * 1;
-      
-      // Dramatic rotation tied to scroll
-      // We use a base rotation that faces the plane nicely towards the camera (diagonal)
-      const targetRotationY = Math.PI / 2.5 + progress * Math.PI * 1.8;
-      const targetRotationX = progress * 1.0 - 0.4;
-      const targetRotationZ = Math.sin(time * 0.15) * 0.15;
-      
-      // Smooth lerping for cinematic feel
-      sceneRef.current.rotation.y = THREE.MathUtils.lerp(sceneRef.current.rotation.y, targetRotationY, 0.04);
-      sceneRef.current.rotation.x = THREE.MathUtils.lerp(sceneRef.current.rotation.x, targetRotationX, 0.04);
-      sceneRef.current.rotation.z = THREE.MathUtils.lerp(sceneRef.current.rotation.z, targetRotationZ, 0.04);
+      // Gentle overall scene breathing to keep it alive
+      sceneRef.current.position.y = Math.sin(time * 0.2) * 1.5;
+      sceneRef.current.rotation.y = Math.sin(time * 0.1) * 0.05;
     }
   });
 
   return (
     <group ref={sceneRef}>
-      {/* Main Hero Jet - Massive and Foregrounded */}
+      {/* Main Hero Jet - Massive and Foregrounded, flying across */}
       <ParallaxPlane 
-        position={[8, -2, 10]} 
-        scale={0.5} 
+        position={[25, -5, -40]} 
+        rotation={[-0.1, -Math.PI / 4, 0]}
+        scale={0.8} 
         scrollSpeed={0.8}
         floatSpeed={0.5}
+        flightSpeed={18}
         scrollProgress={scrollProgress}
       />
 
-      {/* Formation of Parallax Planes - Different depths and speeds */}
+      {/* Formation of Secondary Planes */}
       <ParallaxPlane 
-        position={[-15, 8, -12]} 
-        scale={0.2} 
-        rotation={[0.4, 0.5, 0.2]}
+        position={[-30, 15, -60]} 
+        scale={0.4} 
+        rotation={[0.1, Math.PI / 6, 0.1]}
         scrollSpeed={1.2}
         floatSpeed={0.8}
+        flightSpeed={14}
         scrollProgress={scrollProgress}
       />
       
       <ParallaxPlane 
-        position={[20, -10, -18]} 
-        scale={0.15} 
-        rotation={[-0.2, -0.6, -0.3]}
+        position={[40, -15, -80]} 
+        scale={0.3} 
+        rotation={[-0.1, -Math.PI / 5, -0.1]}
         scrollSpeed={-0.6}
         floatSpeed={0.6}
+        flightSpeed={10}
         scrollProgress={scrollProgress}
       />
 
-      {/* Additional Parallax Planes for Enhanced Effect */}
+      {/* Additional Distant Planes */}
       <ParallaxPlane 
-        position={[-25, 15, 5]} 
-        scale={0.25} 
-        rotation={[0.3, -0.4, 0.1]}
+        position={[-50, 20, -100]} 
+        scale={0.35} 
+        rotation={[0, Math.PI / 8, 0]}
         scrollSpeed={1.5}
         floatSpeed={0.7}
+        flightSpeed={12}
         scrollProgress={scrollProgress}
       />
 
       <ParallaxPlane 
-        position={[30, 5, -8]} 
-        scale={0.2} 
-        rotation={[-0.5, 0.3, -0.2]}
+        position={[50, 10, -90]} 
+        scale={0.25} 
+        rotation={[-0.2, -Math.PI / 3, 0]}
         scrollSpeed={-1.0}
         floatSpeed={0.9}
-        scrollProgress={scrollProgress}
-      />
-
-      <ParallaxPlane 
-        position={[-8, 20, -25]} 
-        scale={0.1} 
-        rotation={[0.6, 0.2, 0.3]}
-        scrollSpeed={2.0}
-        floatSpeed={1.2}
-        scrollProgress={scrollProgress}
-      />
-
-      <ParallaxPlane 
-        position={[15, -15, 15]} 
-        scale={0.22} 
-        rotation={[-0.3, -0.5, 0.4]}
-        scrollSpeed={0.4}
-        floatSpeed={0.4}
+        flightSpeed={15}
         scrollProgress={scrollProgress}
       />
     </group>

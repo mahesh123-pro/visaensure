@@ -7,6 +7,9 @@ import Image from "next/image";
 import { ArrowRight, Globe, CheckCircle2, ShieldCheck, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import Magnetic from "@/components/animations/Magnetic";
+import dynamic from "next/dynamic";
+
+const HeroBackground3D = dynamic(() => import("./HeroBackground3D"), { ssr: false });
 
 export default function HeroSection() {
     const heroRef = useRef<HTMLDivElement>(null);
@@ -93,6 +96,9 @@ export default function HeroSection() {
                 <div className="parallax-bg absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-[#EE2720]/05 blur-[140px] rounded-full mix-blend-multiply transition-colors dark:bg-[#EE2720]/10 dark:mix-blend-soft-light" />
                 <div className="parallax-bg absolute bottom-[-20%] right-[-10%] w-[70%] h-[70%] bg-[#A78BFA]/05 blur-[140px] rounded-full mix-blend-multiply transition-colors dark:bg-[#A78BFA]/10 dark:mix-blend-soft-light" />
 
+                {/* 3D Realistic Airplane Canvas Background */}
+                <HeroBackground3D />
+
                 {/* Subtle mesh pattern overlay */}
                 <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4v-4H4v4H0v2h4v4h2v-4h4v-2H6zM36 4v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} />
             </div>
@@ -153,7 +159,7 @@ export default function HeroSection() {
                         <Magnetic>
                             <Link
                                 href="/services"
-                                className="inline-flex items-center gap-3 px-10 py-5 bg-white text-slate-900 border border-border rounded-2xl font-bold transition-all shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:bg-gray-50 dark:bg-card dark:text-white dark:hover:bg-card/80 dark:border-white/10"
+                                className="inline-flex items-center gap-3 px-10 py-5 bg-white text-foreground border border-border rounded-2xl font-bold transition-all shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:bg-gray-50 dark:bg-card dark:text-white dark:hover:bg-card/80 dark:border-white/10"
                             >
                                 <Globe size={20} className="text-primary" />
                                 Check Eligibility
@@ -204,51 +210,7 @@ export default function HeroSection() {
                         <div className="absolute inset-0 border-[12px] border-white/30 rounded-[3rem] pointer-events-none" />
                     </div>
 
-                    {/* 3D Plane Elements with Parallax Effect */}
-                    <motion.div
-                        animate={{ 
-                            y: [0, -20, 0],
-                            x: [0, 10, 0],
-                            rotate: [0, 5, 0]
-                        }}
-                        transition={{ 
-                            duration: 6, 
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                        className="absolute top-20 -right-8 z-30 opacity-80"
-                    >
-                        <svg width="120" height="72" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <ellipse cx="100" cy="60" rx="80" ry="20" fill="#FFFFFF" opacity="0.9"/>
-                            <path d="M90 60 L140 20 L150 30 L100 70 Z" fill="#FFFFFF" opacity="0.7"/>
-                            <path d="M90 60 L140 100 L150 90 L100 50 Z" fill="#FFFFFF" opacity="0.7"/>
-                            <path d="M20 60 L50 30 L60 40 L30 70 Z" fill="#EE2720" opacity="0.8"/>
-                            <circle cx="170" cy="60" r="8" fill="#4488ff" opacity="0.9"/>
-                        </svg>
-                    </motion.div>
 
-                    <motion.div
-                        animate={{ 
-                            y: [0, 30, 0],
-                            x: [0, -15, 0],
-                            rotate: [0, -8, 0]
-                        }}
-                        transition={{ 
-                            duration: 8, 
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: 1
-                        }}
-                        className="absolute bottom-32 -left-16 z-30 opacity-60"
-                    >
-                        <svg width="80" height="48" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <ellipse cx="100" cy="60" rx="80" ry="20" fill="#bfdbfe" opacity="0.8"/>
-                            <path d="M90 60 L140 20 L150 30 L100 70 Z" fill="#bfdbfe" opacity="0.6"/>
-                            <path d="M90 60 L140 100 L150 90 L100 50 Z" fill="#bfdbfe" opacity="0.6"/>
-                            <path d="M20 60 L50 30 L60 40 L30 70 Z" fill="#A78BFA" opacity="0.7"/>
-                            <circle cx="170" cy="60" r="8" fill="#4488ff" opacity="0.9"/>
-                        </svg>
-                    </motion.div>
 
                     {/* Floating Premium Cards */}
                     <div

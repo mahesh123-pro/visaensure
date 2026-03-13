@@ -22,7 +22,7 @@ export default function ContactPage() {
                     <h1 className="text-5xl md:text-6xl font-bold font-heading mb-6 tracking-tight text-foreground">
                         Get in <span className="text-gradient">Touch</span>
                     </h1>
-                    <p className="text-xl text-gray-600 leading-relaxed">
+                    <p className="text-xl text-muted-foreground leading-relaxed">
                         Our global team of immigration experts is ready to assist you. Drop us a message or visit our office.
                     </p>
                 </motion.div>

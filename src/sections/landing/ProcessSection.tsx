@@ -51,7 +51,7 @@ export default function ProcessSection() {
                         className="text-4xl md:text-5xl font-bold font-heading mb-6 tracking-tight text-foreground"
                     >
                         A Seamless Journey <br className="hidden md:block" />
-                        <span className="text-gray-500">To Your Destination</span>
+                        <span className="text-muted-foreground">To Your Destination</span>
                     </motion.h2>
                 </div>
 
