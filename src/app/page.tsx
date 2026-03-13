@@ -5,6 +5,8 @@ import TrustSection from "@/sections/landing/TrustSection";
 import ServicesSection from "@/sections/landing/ServicesSection";
 import ProcessSection from "@/sections/landing/ProcessSection";
 import CountriesSection from "@/sections/landing/CountriesSection";
+import WhyChooseUsSection from "@/sections/landing/WhyChooseUsSection";
+import EligibilityCheckerSection from "@/sections/landing/EligibilityCheckerSection";
 import TestimonialsSection from "@/sections/landing/TestimonialsSection";
 import CTASection from "@/sections/landing/CTASection";
 import ParallaxSection from "@/sections/landing/ParallaxSection";
@@ -36,10 +38,12 @@ export default function Home() {
       >
         <HeroSection />
         <TrustSection />
-        <ServicesSection />
         <ProcessSection />
-        <ParallaxSection />
         <CountriesSection />
+        <ServicesSection />
+        <WhyChooseUsSection />
+        <EligibilityCheckerSection />
+        <ParallaxSection />
         <Airplane3DSection />
         <TestimonialsSection />
         <CTASection />

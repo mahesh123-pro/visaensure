@@ -33,9 +33,10 @@ function AnimatedCounter({ value, duration = 2 }: { value: number; duration?: nu
 }
 
 const trustItems = [
-    { label: "Successful Applications", value: 1000, suffix: "+" },
-    { label: "Visa Experts", value: 50, suffix: "+" },
-    { label: "Global Processing", value: 99, suffix: "%" },
+    { label: "Visa Applications Processed", value: 10000, suffix: "+" },
+    { label: "Success Rate", value: 98, suffix: "%" },
+    { label: "Countries Supported", value: 25, suffix: "+" },
+    { label: "Visa Experts", value: 15, suffix: "+" },
 ];
 
 export default function TrustSection() {
@@ -49,7 +50,7 @@ export default function TrustSection() {
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
             <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-8 divide-x divide-border transition-colors">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 divide-y sm:divide-y-0 sm:divide-x divide-border transition-colors">
                 {trustItems.map((item, index) => (
                     <motion.div
                         key={index}

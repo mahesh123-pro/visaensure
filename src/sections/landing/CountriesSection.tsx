@@ -7,27 +7,39 @@ import ScrollHero from "@/components/animations/ScrollHero";
 
 const countries = [
     {
-        name: "USA",
-        image: "/images/usa.png",
-        color: "from-blue-600 to-red-600"
-    },
-    {
         name: "Canada",
         image: "/images/canada.png",
-        color: "from-red-500 to-red-800"
+        flag: "🇨🇦",
+        types: "PR, Study, Work",
+        time: "6-8 Months"
     },
     {
         name: "UK",
         image: "/images/uk.png",
-        color: "from-indigo-800 to-red-700"
+        flag: "🇬🇧",
+        types: "Study, Work, Tourist",
+        time: "3-4 Weeks"
     },
     {
         name: "Australia",
         image: "/images/australia.png",
+        flag: "🇦🇺",
+        types: "PR, Study, Work",
+        time: "5-7 Months"
     },
     {
-        name: "Europe",
-        image: "/images/europe.png"
+        name: "Germany",
+        image: "/images/europe.png",
+        flag: "🇩🇪",
+        types: "Job Seeker, Study",
+        time: "4-6 Weeks"
+    },
+    {
+        name: "USA",
+        image: "/images/usa.png",
+        flag: "🇺🇸",
+        types: "F1, H1B, B1/B2",
+        time: "Varies"
     }
 ];
 
@@ -83,16 +95,28 @@ export default function CountriesSection() {
 
                             {/* Content */}
                             <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                                <h3 className="text-4xl font-heading font-bold text-white mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                    {country.name}
-                                </h3>
+                                <div className="translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+                                    <h3 className="text-3xl md:text-4xl font-heading font-bold text-white mb-3 flex items-center gap-3 drop-shadow-lg">
+                                        <span className="text-4xl drop-shadow-md">{country.flag}</span>
+                                        {country.name} Visa
+                                    </h3>
+                                    
+                                    <div className="flex items-center gap-4 text-white/95 font-medium mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] text-white/70 uppercase tracking-widest font-bold">Visa Types</span>
+                                            <span className="text-sm md:text-base">{country.types}</span>
+                                        </div>
+                                        <div className="w-px h-8 bg-white/30" />
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] text-white/70 uppercase tracking-widest font-bold">Processing</span>
+                                            <span className="text-sm md:text-base">{country.time}</span>
+                                        </div>
+                                    </div>
 
-                                <div className="flex items-center gap-2 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-100">
-                                    <span className="text-sm font-medium text-primary uppercase tracking-widest">
-                                        Explore Visa Options
-                                    </span>
-                                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
-                                        <ArrowRight size={16} />
+                                    <div className="flex items-center gap-2 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-200">
+                                        <span className="text-xs md:text-sm font-bold text-white uppercase tracking-widest bg-primary/90 px-4 py-2 rounded-full backdrop-blur-md border border-white/20 hover:bg-primary transition-colors flex items-center gap-2">
+                                            Explore Options <ArrowRight size={14} />
+                                        </span>
                                     </div>
                                 </div>
                             </div>

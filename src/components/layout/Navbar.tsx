@@ -9,9 +9,10 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Countries", href: "/#countries" },
+    { name: "Success Stories", href: "/#testimonials" },
+    { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
 ];
 
@@ -75,7 +76,7 @@ export default function Navbar() {
                     >
                         <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
                         <span className="relative flex items-center gap-2">
-                            Apply Now
+                            Free Assessment
                         </span>
                     </Link>
                 </div>

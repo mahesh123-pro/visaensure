@@ -35,8 +35,8 @@ export default function CTASection() {
                         transition={{ delay: 0.2 }}
                         className="text-5xl md:text-6xl lg:text-7xl font-bold font-heading mb-6 text-foreground tracking-tight transition-colors"
                     >
-                        Start Your Visa <br />
-                        <span className="text-gradient">Journey Today</span>
+                        Ready to start your <br />
+                        <span className="text-gradient">visa process?</span>
                     </motion.h2>
 
                     <motion.p
@@ -57,18 +57,19 @@ export default function CTASection() {
                         className="flex flex-col sm:flex-row items-center justify-center gap-4"
                     >
                         <Link
-                            href="/contact"
+                            href="/services"
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-medium transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(238,39,32,0.3)]"
                         >
-                            Apply Now
+                            Free Eligibility Check
                             <ArrowRight size={18} />
                         </Link>
                         <Link
-                            href="/services"
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-card shadow-sm border border-border text-foreground rounded-full font-medium transition-all hover:bg-muted"
+                            href="https://wa.me/1234567890" // example whatsapp link
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-500 hover:bg-green-600 text-white shadow-sm rounded-full font-medium transition-all"
                         >
-                            <Calendar size={18} />
-                            Book Consultation
+                            WhatsApp Consultation
                         </Link>
                     </motion.div>
                 </motion.div>

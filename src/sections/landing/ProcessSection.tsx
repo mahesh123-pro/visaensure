@@ -6,17 +6,17 @@ import { StepIllustration, TouristVisaIllustration } from "@/components/Illustra
 const processSteps = [
     {
         number: "01",
-        title: "Profile Evaluation",
-        description: "Thorough assessment of your background and goals to determine the best visa pathway.",
+        title: "Free Consultation",
+        description: "Speak with our experts to evaluate your profile and determine the best visa pathway.",
     },
     {
         number: "02",
-        title: "Documentation",
-        description: "Expert assistance in preparing, translating, and organizing all required paperwork.",
+        title: "Document Checklist",
+        description: "Get a personalized checklist and expert assistance in preparing all required paperwork.",
     },
     {
         number: "03",
-        title: "Application Filing",
+        title: "Application Submission",
         description: "Meticulous submission of your application, ensuring zero errors and prompt processing.",
     },
     {
@@ -41,7 +41,7 @@ export default function ProcessSection() {
                         viewport={{ once: true }}
                         className="inline-block px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 mb-6 text-primary text-sm font-semibold tracking-widest uppercase shadow-[0_0_20px_rgba(238,39,32,0.15)]"
                     >
-                        The Process
+                        How It Works
                     </motion.div>
                     <motion.h2
                         initial={{ opacity: 0, y: 30 }}
@@ -50,7 +50,7 @@ export default function ProcessSection() {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-bold font-heading mb-6 tracking-tight text-foreground"
                     >
-                        A Seamless Journey <br className="hidden md:block" />
+                        Simple Steps <br className="hidden md:block" />
                         <span className="text-muted-foreground">To Your Destination</span>
                     </motion.h2>
                 </div>

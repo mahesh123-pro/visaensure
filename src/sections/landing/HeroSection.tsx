@@ -115,16 +115,16 @@ export default function HeroSection() {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
                         </span>
-                        <span className="text-xs font-bold text-foreground tracking-[0.15em] uppercase">Trusted by 10,000+ Students</span>
+                        <span className="text-xs font-bold text-foreground tracking-[0.15em] uppercase">⭐ 10,000+ Successful Visas</span>
                     </motion.div>
 
                     <h1
                         ref={(el) => { textRefs.current[1] = el; }}
-                        className="text-6xl sm:text-7xl lg:text-8xl font-black font-heading leading-[0.9] mb-8 tracking-tighter text-foreground"
+                        className="text-5xl sm:text-6xl lg:text-7xl font-black font-heading leading-[1.1] mb-8 tracking-tighter text-foreground"
                     >
-                        Global Visa <br />
-                        <span className="relative">
-                            Success
+                        Get Your Visa <br />
+                        <span className="relative inline-block mt-2">
+                            Approved
                             <motion.span
                                 className="absolute -bottom-2 left-0 w-full h-3 bg-primary/10 -z-10 rounded-full"
                                 initial={{ width: 0 }}
@@ -132,14 +132,14 @@ export default function HeroSection() {
                                 transition={{ delay: 1, duration: 1 }}
                             />
                         </span> <br />
-                        <span className="text-gradient">Simplified</span>
+                        <span className="text-gradient">Without Mistakes</span>
                     </h1>
 
                     <p
                         ref={(el) => { textRefs.current[2] = el; }}
                         className="text-xl text-muted-foreground mb-10 max-w-lg leading-relaxed font-medium"
                     >
-                        Empowering your international dreams with high-precision visa consultancy and AI-driven documentation support.
+                        Expert visa consultants helping you with Study, Work, and PR visas for 25+ countries.
                     </p>
 
                     <div
@@ -148,21 +148,21 @@ export default function HeroSection() {
                     >
                         <Magnetic>
                             <Link
-                                href="/contact"
+                                href="/services"
                                 className="relative inline-flex items-center gap-3 px-10 py-5 bg-primary text-white rounded-2xl font-bold transition-all shadow-[0_10px_30px_rgba(238,39,32,0.3)] hover:shadow-[0_15px_40px_rgba(238,39,32,0.4)]"
                             >
-                                Apply Now
+                                Get Free Assessment
                                 <ArrowRight size={20} />
                             </Link>
                         </Magnetic>
 
                         <Magnetic>
                             <Link
-                                href="/services"
+                                href="/contact"
                                 className="inline-flex items-center gap-3 px-10 py-5 bg-white text-foreground border border-border rounded-2xl font-bold transition-all shadow-[0_5px_15px_rgba(0,0,0,0.05)] hover:bg-gray-50 dark:bg-card dark:text-white dark:hover:bg-card/80 dark:border-white/10"
                             >
                                 <Globe size={20} className="text-primary" />
-                                Check Eligibility
+                                Talk to Expert
                             </Link>
                         </Magnetic>
                     </div>
@@ -172,16 +172,21 @@ export default function HeroSection() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.5 }}
-                        className="mt-12 flex items-center gap-6"
+                        className="mt-12 flex flex-wrap items-center gap-4 md:gap-6"
                     >
                         <div className="flex items-center gap-2">
                             <ShieldCheck size={20} className="text-primary" />
-                            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Certified Experts</span>
+                            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">10,000+ Visas</span>
                         </div>
-                        <div className="w-px h-4 bg-border" />
+                        <div className="hidden md:block w-px h-4 bg-border" />
                         <div className="flex items-center gap-2">
-                            <CheckCircle2 size={20} className="text-green-500" />
-                            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">99% Success Rate</span>
+                            <Globe size={20} className="text-primary" />
+                            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">25+ Countries</span>
+                        </div>
+                        <div className="hidden lg:block w-px h-4 bg-border" />
+                        <div className="flex items-center gap-2">
+                            <FileText size={20} className="text-primary" />
+                            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">100% Guidance</span>
                         </div>
                     </motion.div>
                 </div>
