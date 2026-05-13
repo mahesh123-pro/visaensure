@@ -65,7 +65,7 @@ export default function WhyChooseUsSection() {
                         transition={{ delay: 0.2 }}
                         className="text-lg text-muted-foreground leading-relaxed"
                     >
-                        We don't just file applications. We architect your international future with precision, speed, and dedicated support.
+                        We don&apos;t just file applications. We architect your international future with precision, speed, and dedicated support.
                     </motion.p>
                 </div>
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
@@ -38,10 +39,11 @@ export default function Preloader() {
                                 transition={{ duration: 1.2, ease: "easeOut" }}
                                 className="w-full h-full"
                             >
-                                <img 
+                                <Image 
                                     src="/images/visaensurelogo.jpeg" 
                                     alt="VisaEnsure Logo" 
-                                    className="w-full h-full object-cover"
+                                    fill
+                                    className="object-cover"
                                 />
                             </motion.div>
                         </div>

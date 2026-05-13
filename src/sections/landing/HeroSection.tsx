@@ -4,10 +4,9 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Globe, CheckCircle2, ShieldCheck, FileText } from "lucide-react";
+import { ArrowRight, Globe, ShieldCheck, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import Magnetic from "@/components/animations/Magnetic";
-import dynamic from "next/dynamic";
 
 
 
