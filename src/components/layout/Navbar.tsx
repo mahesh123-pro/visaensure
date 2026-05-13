@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Plane } from "lucide-react";
+
 import Logo from "@/components/Logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -39,20 +39,7 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 <Link href="/" className="flex items-center group transition-transform hover:scale-105 gap-2">
                     <Logo />
-                    <motion.div
-                        animate={{
-                            x: [0, 5, 0],
-                            y: [0, -3, 0]
-                        }}
-                        transition={{
-                            duration: 4,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                        className="text-primary hidden lg:block"
-                    >
-                        <Plane size={18} className="rotate-[15deg]" />
-                    </motion.div>
+
                 </Link>
 
                 <nav className="hidden md:flex items-center gap-8">

@@ -10,7 +10,7 @@ import EligibilityCheckerSection from "@/sections/landing/EligibilityCheckerSect
 import TestimonialsSection from "@/sections/landing/TestimonialsSection";
 import CTASection from "@/sections/landing/CTASection";
 import ParallaxSection from "@/sections/landing/ParallaxSection";
-import Airplane3DSection from "@/sections/landing/Airplane3DSection";
+
 import { motion, useScroll, useSpring } from "framer-motion";
 
 export default function Home() {
@@ -44,7 +44,7 @@ export default function Home() {
         <WhyChooseUsSection />
         <EligibilityCheckerSection />
         <ParallaxSection />
-        <Airplane3DSection />
+
         <TestimonialsSection />
         <CTASection />
       </motion.div>

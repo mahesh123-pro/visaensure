@@ -9,14 +9,13 @@ import { motion } from "framer-motion";
 import Magnetic from "@/components/animations/Magnetic";
 import dynamic from "next/dynamic";
 
-const HeroBackground3D = dynamic(() => import("./HeroBackground3D"), { ssr: false });
+
 
 export default function HeroSection() {
     const heroRef = useRef<HTMLDivElement>(null);
     const textRefs = useRef<(HTMLHeadingElement | HTMLParagraphElement | HTMLDivElement | null)[]>([]);
     const floatingCardsRef = useRef<(HTMLDivElement | null)[]>([]);
     const mainImageRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
         if (!heroRef.current) return;
 
@@ -30,23 +29,7 @@ export default function HeroSection() {
                 { y: 0, opacity: 1, scale: 1, duration: 1.2, stagger: 0.15, delay: 0.3 }
             );
 
-            // Main Image Spawn
-            if (mainImageRef.current) {
-                tl.fromTo(
-                    mainImageRef.current,
-                    { scale: 0.9, opacity: 0, filter: "blur(10px)", y: 100 },
-                    { scale: 1, opacity: 1, filter: "blur(0px)", y: 0, duration: 1.8, ease: "power3.out" },
-                    "-=1"
-                );
 
-                gsap.to(mainImageRef.current, {
-                    y: "-=30",
-                    duration: 5,
-                    ease: "sine.inOut",
-                    yoyo: true,
-                    repeat: -1,
-                });
-            }
 
             // Floating card initial spawn
             tl.fromTo(
@@ -77,9 +60,7 @@ export default function HeroSection() {
 
                 gsap.to(".parallax-bg", { x: x * 0.8, y: y * 0.8, duration: 2, ease: "power2.out" });
                 gsap.to(floatingCardsRef.current, { x: -x * 0.4, y: -y * 0.4, duration: 1.5, ease: "power2.out" });
-                if (mainImageRef.current) {
-                    gsap.to(mainImageRef.current, { x: -x * 0.15, y: -y * 0.15, duration: 2, ease: "power2.out" });
-                }
+
             };
 
             window.addEventListener("mousemove", handleMouseMove);
@@ -96,8 +77,7 @@ export default function HeroSection() {
                 <div className="parallax-bg absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-[#EE2720]/05 blur-[140px] rounded-full mix-blend-multiply transition-colors dark:bg-[#EE2720]/10 dark:mix-blend-soft-light" />
                 <div className="parallax-bg absolute bottom-[-20%] right-[-10%] w-[70%] h-[70%] bg-[#A78BFA]/05 blur-[140px] rounded-full mix-blend-multiply transition-colors dark:bg-[#A78BFA]/10 dark:mix-blend-soft-light" />
 
-                {/* 3D Realistic Airplane Canvas Background */}
-                <HeroBackground3D />
+
 
                 {/* Subtle mesh pattern overlay */}
                 <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4v-4H4v4H0v2h4v4h2v-4h4v-2H6zM36 4v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} />
@@ -199,22 +179,20 @@ export default function HeroSection() {
                         <div className="absolute w-[650px] h-[650px] rounded-full border border-secondary/05 animate-[spin_30s_linear_infinite_reverse]" />
                     </div>
 
-                    {/* Main Image Container */}
+                    {/* Main Image Container - Updated with Abstract Globe */}
                     <div
                         ref={mainImageRef}
-                        className="relative w-[450px] h-[550px] rounded-[3rem] overflow-hidden shadow-[0_40px_80px_-15px_rgba(0,0,0,0.15)] z-0 group"
+                        className="relative w-[500px] h-[500px] z-0 group"
                     >
                         <Image
-                            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1588&auto=format&fit=crop"
-                            alt="Premium Global Visa Services"
+                            src="/images/hero-image.png"
+                            alt="Global Visa Services"
                             fill
-                            className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                            className="object-contain transition-transform duration-1000 group-hover:scale-105"
                             priority
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                        <div className="absolute inset-0 border-[12px] border-white/30 rounded-[3rem] pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
                     </div>
-
 
 
                     {/* Floating Premium Cards */}
@@ -263,10 +241,10 @@ export default function HeroSection() {
                         <p className="text-xs font-black uppercase tracking-[0.2em] text-muted-foreground mb-4">Our Top Experts</p>
                         <div className="flex -space-x-4 mb-2">
                             {[
-                                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1587&auto=format&fit=crop",
                                 "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1587&auto=format&fit=crop",
-                                "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1588&auto=format&fit=crop",
-                                "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1587&auto=format&fit=crop"
+                                "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1587&auto=format&fit=crop",
+                                "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1587&auto=format&fit=crop",
+                                "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1587&auto=format&fit=crop"
                             ].map((src, i) => (
                                 <div key={i} className="w-12 h-12 rounded-full border-4 border-white shadow-sm overflow-hidden transition-transform hover:scale-110 hover:z-30 cursor-pointer">
                                     <Image src={src} alt="Expert" width={48} height={48} className="object-cover" />
