@@ -7,6 +7,13 @@ import ScrollHero from "@/components/animations/ScrollHero";
 
 const countries = [
     {
+        name: "USA",
+        image: "/images/usa.png",
+        flag: "🇺🇸",
+        types: "F1, H1B, B1/B2",
+        time: "Varies"
+    },
+    {
         name: "Canada",
         image: "/images/canada.png",
         flag: "🇨🇦",
@@ -28,18 +35,11 @@ const countries = [
         time: "5-7 Months"
     },
     {
-        name: "Germany",
+        name: "Europe",
         image: "/images/europe.png",
-        flag: "🇩🇪",
-        types: "Job Seeker, Study",
-        time: "4-6 Weeks"
-    },
-    {
-        name: "USA",
-        image: "/images/usa.png",
-        flag: "🇺🇸",
-        types: "F1, H1B, B1/B2",
-        time: "Varies"
+        flag: "🇪🇺",
+        types: "Schengen, Study, Work",
+        time: "2-4 Weeks"
     }
 ];
 

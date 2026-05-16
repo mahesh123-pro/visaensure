@@ -36,11 +36,15 @@ export default function Navbar() {
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out px-6 lg:px-12 ${scrolled ? "py-4 bg-background/80 backdrop-blur-xl border-b border-border shadow-sm" : "py-8 bg-transparent"
                 }`}
         >
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
-                <Link href="/" className="flex items-center group transition-transform hover:scale-105 gap-2">
+            <div className="absolute left-[-80px] md:left-[-180px] top-1/2 -translate-y-1/2 z-20">
+                <Link href="/" className="flex items-center group transition-transform hover:scale-110 gap-2">
                     <Logo />
-
                 </Link>
+            </div>
+
+            <div className="max-w-7xl mx-auto flex items-center justify-end relative">
+
+                <div className="flex-grow" /> {/* Spacer to push nav links to the right if needed */}
 
                 <nav className="hidden md:flex items-center gap-8">
                     {navLinks.map((link) => (
@@ -57,15 +61,7 @@ export default function Navbar() {
 
                 <div className="flex items-center gap-4">
                     <ThemeToggle />
-                    <Link
-                        href="/contact"
-                        className="hidden sm:inline-flex relative items-center justify-center px-8 py-3 overflow-hidden font-bold rounded-full group bg-primary text-white shadow-[0_5px_15px_rgba(238,39,32,0.2)] transition-all hover:shadow-[0_8px_25px_rgba(238,39,32,0.3)] hover:scale-105 active:scale-95"
-                    >
-                        <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
-                        <span className="relative flex items-center gap-2">
-                            Free Assessment
-                        </span>
-                    </Link>
+
                 </div>
             </div>
         </motion.header>

@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import Preloader from "@/components/animations/Preloader";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body
         className={`antialiased font-body relative`}
       >
+        <Preloader />
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

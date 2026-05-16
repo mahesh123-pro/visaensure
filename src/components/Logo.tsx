@@ -3,9 +3,9 @@ import Image from "next/image";
 export default function Logo({ className = "" }: { className?: string }) {
     return (
         <div className={`flex items-center gap-2 ${className}`}>
-            <div className="relative w-40 h-12 flex-shrink-0">
+            <div className="relative w-[450px] md:w-[800px] h-44 md:h-72 flex-shrink-0">
                 <Image 
-                    src="/images/visaensurelogo.jpeg" 
+                    src="/images/visaensureMainlogo.png" 
                     alt="VisaEnsure Logo" 
                     fill 
                     className="object-contain"
