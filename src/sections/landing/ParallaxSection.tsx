@@ -40,7 +40,7 @@ export default function ParallaxSection() {
                 />
             </motion.div>
 
-            {/* 3D Plane Parallax Layer - Multiple planes at different depths */}
+
 
 
             {/* Middle Layer: Text Content */}
