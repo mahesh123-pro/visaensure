@@ -10,35 +10,35 @@ const countries = [
         name: "USA",
         image: "/images/usa.png",
         flag: "🇺🇸",
-        types: "F1, H1B, B1/B2",
+        types: "H1B, F1, J1, M1, B1/B2, L1",
         time: "Varies"
     },
     {
         name: "Canada",
         image: "/images/canada.png",
         flag: "🇨🇦",
-        types: "PR, Study, Work",
+        types: "PR, PNP, Student, Open Work, Visitor",
         time: "6-8 Months"
     },
     {
         name: "UK",
         image: "/images/uk.png",
         flag: "🇬🇧",
-        types: "Study, Work, Tourist",
+        types: "Skilled Worker, Visitor, Spouse, Business",
         time: "3-4 Weeks"
     },
     {
         name: "Australia",
         image: "/images/australia.png",
         flag: "🇦🇺",
-        types: "PR, Study, Work",
+        types: "PR, Student, Dependent, Business, Tourist",
         time: "5-7 Months"
     },
     {
         name: "Europe",
         image: "/images/europe.png",
         flag: "🇪🇺",
-        types: "Schengen, Study, Work",
+        types: "Student, Job Seeker, Business, Visitor",
         time: "2-4 Weeks"
     }
 ];

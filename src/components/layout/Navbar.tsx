@@ -8,12 +8,13 @@ import Logo from "@/components/Logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/services" },
-    { name: "Countries", href: "/#countries" },
-    { name: "Success Stories", href: "/#testimonials" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
+    { name: "About Us", href: "/about" },
+    { name: "Study", href: "/services/study" },
+    { name: "Work", href: "/services/work" },
+    { name: "Migrate", href: "/services/migrate" },
+    { name: "Coaching", href: "/services/coaching" },
+    { name: "Tourism", href: "/services/tourism" },
+    { name: "Contact Us", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -36,7 +37,7 @@ export default function Navbar() {
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out px-6 lg:px-12 ${scrolled ? "py-4 bg-background/80 backdrop-blur-xl border-b border-border shadow-sm" : "py-8 bg-transparent"
                 }`}
         >
-            <div className="absolute left-[-80px] md:left-[-180px] top-1/2 -translate-y-1/2 z-20">
+            <div className="absolute left-[-80px] md:left-[-180px] top-1/2 -translate-y-1/2 z-20 mt-3 md:mt-6">
                 <Link href="/" className="flex items-center group transition-transform hover:scale-110 gap-2">
                     <Logo />
                 </Link>

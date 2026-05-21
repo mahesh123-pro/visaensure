@@ -10,6 +10,7 @@ import EligibilityCheckerSection from "@/sections/landing/EligibilityCheckerSect
 import TestimonialsSection from "@/sections/landing/TestimonialsSection";
 import CTASection from "@/sections/landing/CTASection";
 import ParallaxSection from "@/sections/landing/ParallaxSection";
+import UniversitiesSection from "@/sections/landing/UniversitiesSection";
 
 import { motion, useScroll, useSpring } from "framer-motion";
 
@@ -43,6 +44,7 @@ export default function Home() {
         <ServicesSection />
         <WhyChooseUsSection />
         <EligibilityCheckerSection />
+        <UniversitiesSection />
         <ParallaxSection />
 
         <TestimonialsSection />

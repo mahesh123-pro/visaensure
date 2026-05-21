@@ -5,32 +5,25 @@ import { CheckCircle2, ShieldCheck, UserCheck, Zap } from "lucide-react";
 
 const advantages = [
     {
-        title: "Document Error Checking",
-        description: "AI-powered and expert-reviewed analysis ensures zero mistakes in your visa applications.",
-        icon: CheckCircle2,
-        color: "text-green-500",
-        bg: "bg-green-500/10"
-    },
-    {
-        title: "Rejection Prevention Strategy",
-        description: "Strategic case presentation customized to highlight your strengths and mitigate risks.",
-        icon: ShieldCheck,
-        color: "text-primary",
-        bg: "bg-primary/10"
-    },
-    {
-        title: "Dedicated Case Manager",
-        description: "A single, experienced point of contact to guide you through every step of the journey.",
+        title: "Personalized Support",
+        description: "Tailored solutions to meet your specific needs.",
         icon: UserCheck,
         color: "text-blue-500",
         bg: "bg-blue-500/10"
     },
     {
-        title: "Fast-Track Processing",
-        description: "Optimized pipelines and priority filing to get your visa approved in record time.",
-        icon: Zap,
-        color: "text-yellow-500",
-        bg: "bg-yellow-500/10"
+        title: "Experienced Professionals",
+        description: "Years of expertise in visa consulting.",
+        icon: ShieldCheck,
+        color: "text-primary",
+        bg: "bg-primary/10"
+    },
+    {
+        title: "High Success Rate",
+        description: "Proven track record for study, work, migration & tourism visas.",
+        icon: CheckCircle2,
+        color: "text-green-500",
+        bg: "bg-green-500/10"
     }
 ];
 
@@ -69,7 +62,7 @@ export default function WhyChooseUsSection() {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
                     {advantages.map((item, index) => (
                         <motion.div
                             key={index}

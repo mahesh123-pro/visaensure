@@ -100,9 +100,9 @@ export default function HeroSection() {
                         ref={(el) => { textRefs.current[1] = el; }}
                         className="text-5xl sm:text-6xl lg:text-7xl font-black font-heading leading-[1.1] mb-8 tracking-tighter text-foreground"
                     >
-                        Get Your Visa <br />
+                        Your Global <br />
                         <span className="relative inline-block mt-2">
-                            Approved
+                            Journey
                             <motion.span
                                 className="absolute -bottom-2 left-0 w-full h-3 bg-primary/10 -z-10 rounded-full"
                                 initial={{ width: 0 }}
@@ -110,14 +110,14 @@ export default function HeroSection() {
                                 transition={{ delay: 1, duration: 1 }}
                             />
                         </span> <br />
-                        <span className="text-gradient">Without Mistakes</span>
+                        <span className="text-gradient">Starts Here!</span>
                     </h1>
 
                     <p
                         ref={(el) => { textRefs.current[2] = el; }}
                         className="text-xl text-muted-foreground mb-10 max-w-lg leading-relaxed font-medium"
                     >
-                        Expert visa consultants helping you with Study, Work, and PR visas for 25+ countries.
+                        Hassle-Free Visa Solutions | 100% Expert Guidance for All Visas
                     </p>
 
                     <div

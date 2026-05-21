@@ -11,11 +11,11 @@ import Preloader from "@/components/animations/Preloader";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "VisaEnsure | Global Visa Support Made Simple",
-  description: "Helping students and professionals secure visas faster with expert guidance. Student Visa, Work Visa, Tourist Visa, Immigration Consultation.",
+  title: "VisaEnsure | Hassle-Free Visa Solutions",
+  description: "Avoid visa mistakes & rejections! Get expert guidance for work, study & PR visas with VisaEnsure. Get Free assessment & fast-track approval!",
   openGraph: {
-    title: "VisaEnsure | Global Visa Support Made Simple",
-    description: "Helping students and professionals secure visas faster with expert guidance.",
+    title: "VisaEnsure | Hassle-Free Visa Solutions",
+    description: "Avoid visa mistakes & rejections! Get expert guidance for work, study & PR visas with VisaEnsure. Get Free assessment & fast-track approval!",
     url: "https://visaensure.com",
     siteName: "VisaEnsure",
     locale: "en_US",
