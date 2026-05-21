@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { Suspense, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Magnetic from "@/components/animations/Magnetic";
 
 const servicesData = [

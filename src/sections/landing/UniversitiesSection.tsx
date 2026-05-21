@@ -76,7 +76,7 @@ export default function UniversitiesSection() {
                         transition={{ delay: 0.2 }}
                         className="text-lg text-muted-foreground leading-relaxed"
                     >
-                        We have partnered with some of the world's most prestigious universities and colleges to give you the best options for your global education.
+                        We have partnered with some of the world&apos;s most prestigious universities and colleges to give you the best options for your global education.
                     </motion.p>
                 </div>
 
