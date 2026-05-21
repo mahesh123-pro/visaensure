@@ -12,7 +12,7 @@ const navLinks = [
     { name: "Study", href: "/services/study" },
     { name: "Work", href: "/services/work" },
     { name: "Migrate", href: "/services/migrate" },
-    { name: "Coaching", href: "/services/coaching" },
+    { name: "Coaching", href: "/services/study" },
     { name: "Tourism", href: "/services/tourism" },
     { name: "Contact Us", href: "/contact" },
 ];
