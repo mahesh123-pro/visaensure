@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Linkedin, MapPin, Mail, Phone, Youtube } from "lucide-react";
+import { Facebook, Twitter, Instagram, Linkedin, MapPin, Mail, Phone } from "lucide-react";
 import Logo from "@/components/Logo";
 
 export default function Footer() {

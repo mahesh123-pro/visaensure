@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, ShieldCheck, UserCheck, Zap } from "lucide-react";
+import { CheckCircle2, ShieldCheck, UserCheck } from "lucide-react";
 
 const advantages = [
     {

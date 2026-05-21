@@ -4,11 +4,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
     CheckCircle2, ChevronDown, GraduationCap, Briefcase, Plane, Scale, 
-    ArrowRight, Globe, FileText, Clock, Users, ShieldCheck, FileCheck2, 
+    ArrowRight, Globe, Clock, Users, ShieldCheck, FileCheck2, 
     BookOpen, Building2, MapPin
 } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect } from "react";
 import Magnetic from "@/components/animations/Magnetic";
 
@@ -431,8 +430,11 @@ function ServicesContent({ tabParam }: { tabParam: string }) {
     );
 }
 
-export default function ServicesPage({ params }: { params: { tab: string } }) {
+import { use } from "react";
+
+export default function ServicesPage({ params }: { params: Promise<{ tab: string }> }) {
+    const { tab } = use(params);
     return (
-        <ServicesContent tabParam={params.tab} />
+        <ServicesContent tabParam={tab} />
     );
 }

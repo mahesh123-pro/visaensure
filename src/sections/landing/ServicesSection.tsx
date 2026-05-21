@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, Briefcase, Plane, Scale, FileText, ArrowUpRight } from "lucide-react";
+import { GraduationCap, Briefcase, Plane, Scale, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { StudentVisaIllustration, WorkVisaIllustration, TouristVisaIllustration, PassportIllustration } from "@/components/Illustrations/TravelIllustrations";
